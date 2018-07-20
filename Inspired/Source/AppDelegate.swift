@@ -1,5 +1,4 @@
 import UIKit
-import CoreData
 
 // MARK: AppDelegate
 
@@ -25,11 +24,10 @@ import CoreData
     }
     
     private func configureWindow() {
-        window = UIWindow(frame: UIScreen.main.bounds).tuned {
+        window = UIWindow(frame: Screen.bounds).tuned {
             $0.backgroundColor = .white
             $0.rootViewController = ViewController()
             $0.makeKeyAndVisible()
         }
     }
 }
-

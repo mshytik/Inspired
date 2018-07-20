@@ -5,6 +5,10 @@ import UIKit
 typealias Json = [String: Any]
 typealias Args = [UIApplicationLaunchOptionsKey: Any]
 
+// MARK: Ui
+
+typealias LayoutPin = NSLayoutConstraint
+
 // MARK: Closure
 
 typealias Execution = () -> ()

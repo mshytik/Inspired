@@ -17,6 +17,10 @@
 		F9D415F5210233D90051D73F /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F4210233D90051D73F /* Types.swift */; };
 		F9D415F7210234E10051D73F /* PathConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F6210234E10051D73F /* PathConfig.swift */; };
 		F9D415F9210238690051D73F /* Tuned.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F8210238690051D73F /* Tuned.swift */; };
+		F9D415FC210239AC0051D73F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FB210239AC0051D73F /* Environment.swift */; };
+		F9D415FE21023A730051D73F /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FD21023A730051D73F /* Layout.swift */; };
+		F9D4160021023B060051D73F /* UiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FF21023B060051D73F /* UiConfig.swift */; };
+		F9D4160221024D8F0051D73F /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160121024D8F0051D73F /* Open.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		F9D415F4210233D90051D73F /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		F9D415F6210234E10051D73F /* PathConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathConfig.swift; sourceTree = "<group>"; };
 		F9D415F8210238690051D73F /* Tuned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuned.swift; sourceTree = "<group>"; };
+		F9D415FB210239AC0051D73F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		F9D415FD21023A730051D73F /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		F9D415FF21023B060051D73F /* UiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiConfig.swift; sourceTree = "<group>"; };
+		F9D4160121024D8F0051D73F /* Open.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Open.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,9 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				F9D415E721022C310051D73F /* AppDelegate.swift */,
-				F9D415E621022C310051D73F /* Config */,
-				F9D415E321022C310051D73F /* Core */,
 				F9D415E821022C310051D73F /* Flow */,
+				F9D415E321022C310051D73F /* Core */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 		F9D415E321022C310051D73F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F9D415E621022C310051D73F /* Config */,
 				F9D415F3210232AA0051D73F /* Declaration */,
 				F9D415E421022C310051D73F /* Component */,
 				F9D415F0210231530051D73F /* Service */,
@@ -135,6 +143,7 @@
 		F9D415E421022C310051D73F /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				F9D415FD21023A730051D73F /* Layout.swift */,
 				F9D415E521022C310051D73F /* ViewController.swift */,
 			);
 			path = Component;
@@ -144,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				F9D415F6210234E10051D73F /* PathConfig.swift */,
+				F9D415FF21023B060051D73F /* UiConfig.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -168,7 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				F9D415F4210233D90051D73F /* Types.swift */,
+				F9D4160121024D8F0051D73F /* Open.swift */,
 				F9D415F8210238690051D73F /* Tuned.swift */,
+				F9D415FB210239AC0051D73F /* Environment.swift */,
 			);
 			path = Declaration;
 			sourceTree = "<group>";
@@ -281,9 +293,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9D415F22102318B0051D73F /* DataService.swift in Sources */,
+				F9D415FC210239AC0051D73F /* Environment.swift in Sources */,
 				F9D415EF21022C310051D73F /* AppDelegate.swift in Sources */,
+				F9D4160021023B060051D73F /* UiConfig.swift in Sources */,
 				F9D415F7210234E10051D73F /* PathConfig.swift in Sources */,
 				F9D415EE21022C310051D73F /* ViewController.swift in Sources */,
+				F9D415FE21023A730051D73F /* Layout.swift in Sources */,
+				F9D4160221024D8F0051D73F /* Open.swift in Sources */,
 				F9D415F9210238690051D73F /* Tuned.swift in Sources */,
 				F9D415F5210233D90051D73F /* Types.swift in Sources */,
 				F9D415E921022C310051D73F /* Inspired.xcdatamodeld in Sources */,
