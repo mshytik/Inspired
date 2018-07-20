@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F9D415B72101F7280051D73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415B62101F7280051D73F /* AppDelegate.swift */; };
-		F9D415B92101F7280051D73F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415B82101F7280051D73F /* ViewController.swift */; };
-		F9D415BC2101F7280051D73F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D415BA2101F7280051D73F /* Main.storyboard */; };
-		F9D415BF2101F7280051D73F /* Inspired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9D415BD2101F7280051D73F /* Inspired.xcdatamodeld */; };
-		F9D415C12101F7290051D73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9D415C02101F7290051D73F /* Assets.xcassets */; };
-		F9D415C42101F7290051D73F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D415C22101F7290051D73F /* LaunchScreen.storyboard */; };
 		F9D415CF2101F7290051D73F /* InspiredTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415CE2101F7290051D73F /* InspiredTests.swift */; };
+		F9D415E921022C310051D73F /* Inspired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9D415DA21022C310051D73F /* Inspired.xcdatamodeld */; };
+		F9D415EA21022C310051D73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9D415DC21022C310051D73F /* Assets.xcassets */; };
+		F9D415EB21022C310051D73F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D415DD21022C310051D73F /* LaunchScreen.storyboard */; };
+		F9D415EC21022C310051D73F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D415DF21022C310051D73F /* Main.storyboard */; };
+		F9D415ED21022C310051D73F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9D415E121022C310051D73F /* Info.plist */; };
+		F9D415EE21022C310051D73F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415E521022C310051D73F /* ViewController.swift */; };
+		F9D415EF21022C310051D73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415E721022C310051D73F /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,16 +29,16 @@
 
 /* Begin PBXFileReference section */
 		F9D415B32101F7280051D73F /* Inspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9D415B62101F7280051D73F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F9D415B82101F7280051D73F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F9D415BB2101F7280051D73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F9D415BE2101F7280051D73F /* Inspired.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Inspired.xcdatamodel; sourceTree = "<group>"; };
-		F9D415C02101F7290051D73F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F9D415C32101F7290051D73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F9D415C52101F7290051D73F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9D415CA2101F7290051D73F /* InspiredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspiredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D415CE2101F7290051D73F /* InspiredTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspiredTests.swift; sourceTree = "<group>"; };
 		F9D415D02101F7290051D73F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9D415DB21022C310051D73F /* Inspired.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Inspired.xcdatamodel; sourceTree = "<group>"; };
+		F9D415DC21022C310051D73F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9D415DE21022C310051D73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F9D415E021022C310051D73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F9D415E121022C310051D73F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9D415E521022C310051D73F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F9D415E721022C310051D73F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +80,8 @@
 		F9D415B52101F7280051D73F /* Inspired */ = {
 			isa = PBXGroup;
 			children = (
-				F9D415B62101F7280051D73F /* AppDelegate.swift */,
-				F9D415B82101F7280051D73F /* ViewController.swift */,
-				F9D415BA2101F7280051D73F /* Main.storyboard */,
-				F9D415C02101F7290051D73F /* Assets.xcassets */,
-				F9D415C22101F7290051D73F /* LaunchScreen.storyboard */,
-				F9D415C52101F7290051D73F /* Info.plist */,
-				F9D415BD2101F7280051D73F /* Inspired.xcdatamodeld */,
+				F9D415E221022C310051D73F /* Source */,
+				F9D415D921022C310051D73F /* Resources */,
 			);
 			path = Inspired;
 			sourceTree = "<group>";
@@ -97,6 +93,59 @@
 				F9D415D02101F7290051D73F /* Info.plist */,
 			);
 			path = InspiredTests;
+			sourceTree = "<group>";
+		};
+		F9D415D921022C310051D73F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F9D415DA21022C310051D73F /* Inspired.xcdatamodeld */,
+				F9D415DC21022C310051D73F /* Assets.xcassets */,
+				F9D415DD21022C310051D73F /* LaunchScreen.storyboard */,
+				F9D415DF21022C310051D73F /* Main.storyboard */,
+				F9D415E121022C310051D73F /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F9D415E221022C310051D73F /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				F9D415E721022C310051D73F /* AppDelegate.swift */,
+				F9D415E321022C310051D73F /* Core */,
+				F9D415E621022C310051D73F /* Config */,
+				F9D415E821022C310051D73F /* Flow */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		F9D415E321022C310051D73F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F9D415E421022C310051D73F /* Component */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		F9D415E421022C310051D73F /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				F9D415E521022C310051D73F /* ViewController.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		F9D415E621022C310051D73F /* Config */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		F9D415E821022C310051D73F /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,9 +229,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9D415C42101F7290051D73F /* LaunchScreen.storyboard in Resources */,
-				F9D415C12101F7290051D73F /* Assets.xcassets in Resources */,
-				F9D415BC2101F7280051D73F /* Main.storyboard in Resources */,
+				F9D415ED21022C310051D73F /* Info.plist in Resources */,
+				F9D415EC21022C310051D73F /* Main.storyboard in Resources */,
+				F9D415EA21022C310051D73F /* Assets.xcassets in Resources */,
+				F9D415EB21022C310051D73F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,9 +250,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9D415B92101F7280051D73F /* ViewController.swift in Sources */,
-				F9D415B72101F7280051D73F /* AppDelegate.swift in Sources */,
-				F9D415BF2101F7280051D73F /* Inspired.xcdatamodeld in Sources */,
+				F9D415EF21022C310051D73F /* AppDelegate.swift in Sources */,
+				F9D415EE21022C310051D73F /* ViewController.swift in Sources */,
+				F9D415E921022C310051D73F /* Inspired.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,20 +275,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F9D415BA2101F7280051D73F /* Main.storyboard */ = {
+		F9D415DD21022C310051D73F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F9D415BB2101F7280051D73F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F9D415C22101F7290051D73F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F9D415C32101F7290051D73F /* Base */,
+				F9D415DE21022C310051D73F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F9D415DF21022C310051D73F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F9D415E021022C310051D73F /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -363,7 +413,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Inspired/Info.plist;
+				INFOPLIST_FILE = Inspired/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -380,7 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Inspired/Info.plist;
+				INFOPLIST_FILE = Inspired/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,12 +515,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F9D415BD2101F7280051D73F /* Inspired.xcdatamodeld */ = {
+		F9D415DA21022C310051D73F /* Inspired.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F9D415BE2101F7280051D73F /* Inspired.xcdatamodel */,
+				F9D415DB21022C310051D73F /* Inspired.xcdatamodel */,
 			);
-			currentVersion = F9D415BE2101F7280051D73F /* Inspired.xcdatamodel */;
+			currentVersion = F9D415DB21022C310051D73F /* Inspired.xcdatamodel */;
 			path = Inspired.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
