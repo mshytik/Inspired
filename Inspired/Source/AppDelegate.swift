@@ -9,35 +9,26 @@ import CoreData
 
     var window: UIWindow?
 
-    func application(_ app: UIApplication, didFinishLaunchingWithOptions args: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ app: UIApplication, didFinishLaunchingWithOptions args: Args?) -> Bool {
+        configureApp()
         return true
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        saveContext()
+        DataService.shared.writeToDisk()
     }
-
-    // MARK: Core Data
-
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Inspired")
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
-
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+    
+    // MARK: Configuration
+    
+    private func configureApp() {
+        configureWindow()
+    }
+    
+    private func configureWindow() {
+        window = UIWindow(frame: UIScreen.main.bounds).tuned {
+            $0.backgroundColor = .white
+            $0.rootViewController = ViewController()
+            $0.makeKeyAndVisible()
         }
     }
 }
