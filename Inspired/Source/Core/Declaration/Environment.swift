@@ -4,6 +4,8 @@ import UIKit
 
 enum Alpha {
     static let clear: CGFloat = 0
+    static let disabled: CGFloat = 0.3
+    static let highlighted: CGFloat = 0.45
     static let opaque: CGFloat = 1
 }
 

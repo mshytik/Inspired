@@ -9,6 +9,15 @@ final class SplashViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        dispatchInitialFlow()
+    }
+    
+    // MARK: Logic
+    
+    private func dispatchInitialFlow() {
+        after(GUI.dispatchDelay) {
+            appWindow?.rootViewController = AuthViewController()
+        }
     }
     
     // MARK: Configuration
@@ -20,5 +29,11 @@ final class SplashViewController: ViewController {
             $0.configureFill()
             $0.image = Image.splash
         }
+    }
+    
+    // MARK: GUI
+    
+    private enum GUI {
+        static let dispatchDelay = 0.25
     }
 }

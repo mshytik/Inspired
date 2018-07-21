@@ -1,5 +1,11 @@
 import UIKit
 
+// MARK: Accessors
+
+var appWindow: UIWindow? {
+    return (UIApplication.shared.delegate)?.window!
+}
+
 // MARK: AppDelegate
 
 @UIApplicationMain final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +30,8 @@ import UIKit
     }
     
     private func configureWindow() {
-        window = UIWindow(frame: Screen.bounds).tuned {
+        window = Window(frame: Screen.bounds).tuned {
+            $0.width(Screen.bounds.width).height(Screen.bounds.height)
             $0.backgroundColor = .white
             $0.rootViewController = SplashViewController()
             $0.makeKeyAndVisible()
