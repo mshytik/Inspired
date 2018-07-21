@@ -18,9 +18,13 @@
 		F9D415F7210234E10051D73F /* PathConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F6210234E10051D73F /* PathConfig.swift */; };
 		F9D415F9210238690051D73F /* Tuned.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F8210238690051D73F /* Tuned.swift */; };
 		F9D415FC210239AC0051D73F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FB210239AC0051D73F /* Environment.swift */; };
-		F9D415FE21023A730051D73F /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FD21023A730051D73F /* Layout.swift */; };
+		F9D415FE21023A730051D73F /* ViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FD21023A730051D73F /* ViewLayout.swift */; };
 		F9D4160021023B060051D73F /* UiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FF21023B060051D73F /* UiConfig.swift */; };
 		F9D4160221024D8F0051D73F /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160121024D8F0051D73F /* Open.swift */; };
+		F9D4160721025BDC0051D73F /* splash.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F9D4160621025BDC0051D73F /* splash.jpeg */; };
+		F9D41609210331F70051D73F /* splash1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F9D41608210331F60051D73F /* splash1.jpeg */; };
+		F9D4160B210332880051D73F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160A210332880051D73F /* SplashViewController.swift */; };
+		F9D4160D210333530051D73F /* ViewConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160C210333530051D73F /* ViewConfigure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,9 +53,13 @@
 		F9D415F6210234E10051D73F /* PathConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathConfig.swift; sourceTree = "<group>"; };
 		F9D415F8210238690051D73F /* Tuned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuned.swift; sourceTree = "<group>"; };
 		F9D415FB210239AC0051D73F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		F9D415FD21023A730051D73F /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		F9D415FD21023A730051D73F /* ViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayout.swift; sourceTree = "<group>"; };
 		F9D415FF21023B060051D73F /* UiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiConfig.swift; sourceTree = "<group>"; };
 		F9D4160121024D8F0051D73F /* Open.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Open.swift; sourceTree = "<group>"; };
+		F9D4160621025BDC0051D73F /* splash.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash.jpeg; sourceTree = "<group>"; };
+		F9D41608210331F60051D73F /* splash1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash1.jpeg; sourceTree = "<group>"; };
+		F9D4160A210332880051D73F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		F9D4160C210333530051D73F /* ViewConfigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConfigure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,7 @@
 		F9D415D921022C310051D73F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F9D4160521025BC60051D73F /* Image */,
 				F9D415DA21022C310051D73F /* Inspired.xcdatamodeld */,
 				F9D415DC21022C310051D73F /* Assets.xcassets */,
 				F9D415DD21022C310051D73F /* LaunchScreen.storyboard */,
@@ -143,7 +152,8 @@
 		F9D415E421022C310051D73F /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				F9D415FD21023A730051D73F /* Layout.swift */,
+				F9D415FD21023A730051D73F /* ViewLayout.swift */,
+				F9D4160C210333530051D73F /* ViewConfigure.swift */,
 				F9D415E521022C310051D73F /* ViewController.swift */,
 			);
 			path = Component;
@@ -162,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				F9D415FA210239340051D73F /* Splash */,
+				F9D4160E210350920051D73F /* Auth */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -188,8 +199,25 @@
 		F9D415FA210239340051D73F /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				F9D4160A210332880051D73F /* SplashViewController.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		F9D4160521025BC60051D73F /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				F9D41608210331F60051D73F /* splash1.jpeg */,
+				F9D4160621025BDC0051D73F /* splash.jpeg */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		F9D4160E210350920051D73F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +301,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9D41609210331F70051D73F /* splash1.jpeg in Resources */,
+				F9D4160721025BDC0051D73F /* splash.jpeg in Resources */,
 				F9D415EA21022C310051D73F /* Assets.xcassets in Resources */,
 				F9D415EB21022C310051D73F /* LaunchScreen.storyboard in Resources */,
 			);
@@ -295,13 +325,15 @@
 				F9D415F22102318B0051D73F /* DataService.swift in Sources */,
 				F9D415FC210239AC0051D73F /* Environment.swift in Sources */,
 				F9D415EF21022C310051D73F /* AppDelegate.swift in Sources */,
+				F9D4160B210332880051D73F /* SplashViewController.swift in Sources */,
 				F9D4160021023B060051D73F /* UiConfig.swift in Sources */,
 				F9D415F7210234E10051D73F /* PathConfig.swift in Sources */,
 				F9D415EE21022C310051D73F /* ViewController.swift in Sources */,
-				F9D415FE21023A730051D73F /* Layout.swift in Sources */,
+				F9D415FE21023A730051D73F /* ViewLayout.swift in Sources */,
 				F9D4160221024D8F0051D73F /* Open.swift in Sources */,
 				F9D415F9210238690051D73F /* Tuned.swift in Sources */,
 				F9D415F5210233D90051D73F /* Types.swift in Sources */,
+				F9D4160D210333530051D73F /* ViewConfigure.swift in Sources */,
 				F9D415E921022C310051D73F /* Inspired.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
