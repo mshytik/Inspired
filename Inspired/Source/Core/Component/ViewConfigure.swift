@@ -28,11 +28,15 @@ extension UIButton {
     }
     
     private enum GUI {
-        static let width: CGFloat = 250
+        static let width: CGFloat = 300
         static let height: CGFloat = 50
         static let corner: CGFloat = height / 2
         static let border: CGFloat = 2
         
         static let color = UIColor.white
     }
+}
+
+extension UICollectionView {
+    
 }

@@ -15,8 +15,10 @@ enum Color {
 // MARK: Font
 
 enum Font {
-    static let bigTitle = UIFont(name: "Papyrus", size: 55)
-    static let borderButton = UIFont(name: "Papyrus", size: 21)
+    static let bigTitle = basic(55)
+    static let borderButton = basic(21)
+    
+    static func basic(_ size: CGFloat) -> UIFont? { return UIFont(name: "Papyrus", size: size) }
 }
 
 // MARK: Text
@@ -26,7 +28,7 @@ enum Text {
     static let appTitle = "Inspiration"
     
     enum Auth {
-        static let view = "View pictures"
+        static let view = "Inspire Now!"
         static let auth = "Login with Unsplash"
     }
 }

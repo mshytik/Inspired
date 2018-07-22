@@ -5,6 +5,11 @@ import UIKit
 typealias Json = [String: Any]
 typealias Args = [UIApplicationLaunchOptionsKey: Any]
 
+enum Result<Value> {
+    case success(value: Value)
+    case failure(error: Error)
+}
+
 // MARK: Ui
 
 typealias LayoutPin = NSLayoutConstraint

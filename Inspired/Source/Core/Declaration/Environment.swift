@@ -30,6 +30,10 @@ enum NumConst {
 
 // MARK: Device
 
+var appWindow: UIWindow? {
+    return (UIApplication.shared.delegate)?.window!
+}
+
 enum Screen {
     static var main: UIScreen { return .main }
     static var bounds: CGRect { return main.bounds }

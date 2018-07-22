@@ -6,13 +6,15 @@ final class AuthViewController: ViewController {
     
     // MARK: Properties
     
+    private let bgImageView = UIImageView()
     private let coverView = UIView()
     private let titleLabel = UILabel()
     private let loginButton = UIButton(type: .custom)
     private let viewButton = UIButton(type: .custom)
     private var titleCyPin: LayoutPin?
     
-    private var fadeInViews: [UIView] { return [titleLabel, loginButton, viewButton] }
+    private var fadeViews: [UIView] { return [titleLabel, loginButton, viewButton] }
+    private var bgViews: [UIView] { return [view, bgImageView, coverView] }
     
     // MARK: Lifecycle
     
@@ -20,6 +22,8 @@ final class AuthViewController: ViewController {
         super.viewDidLoad()
         configure()
         initialAnimation()
+        
+        PhotosProvider.fetchPhotos() { _ in }
     }
     
     // MARK: Animate
@@ -36,18 +40,35 @@ final class AuthViewController: ViewController {
         titleCyPin?.constant = GUI.destinationTitleY
         UIView.animate(withDuration: GUI.titleDuration) {
             self.view.layoutIfNeeded()
-            self.fadeInViews.forEach { $0.alpha = Alpha.opaque }
+            self.fadeViews.forEach { $0.alpha = Alpha.opaque }
         }
+    }
+    
+    private func animateToHome() {
+        let animation: Animation = { self.fadeViews.forEach { $0.alpha = Alpha.clear } }
+        UIView.animate(withDuration: GUI.outDuration, animations: animation) { [weak self] _ in
+            guard let this = self else { return }
+            let animation: Animation = { this.bgViews.forEach { $0.alpha = Alpha.clear } }
+            UIView.animate(withDuration: GUI.outDuration, animations: animation) { _ in
+                
+            }
+        }
+    }
+    
+    // MARK: Actions
+    
+    @objc func viewTap() {
+        animateToHome()
     }
     
     // MARK: Configure
     
     private func configure() {
         tuned {
-            $0.fadeInViews.forEach { $0.alpha = Alpha.clear }
+            $0.fadeViews.forEach { $0.alpha = Alpha.clear }
         }
         
-        UIImageView().addTo(view).tuned {
+        bgImageView.addTo(view).tuned {
             $0.cx(view).cy(view).width(Screen.bounds.width).height(Screen.bounds.height)
             $0.configureFill()
             $0.image = Image.splash
@@ -71,6 +92,7 @@ final class AuthViewController: ViewController {
             $0.configureBordered()
             $0.bottom(view, -GUI.buttonOffset).cx(view)
             $0.setTitle(Text.Auth.view, for: .normal)
+            $0.addTarget(self, action: #selector(viewTap), for: .touchUpInside)
         }
         
         loginButton.addTo(view).tuned {
@@ -86,6 +108,7 @@ final class AuthViewController: ViewController {
         static let initialDelay: TimeInterval = 0.3
         static let darkDuration: TimeInterval = 0.55
         static let titleDuration: TimeInterval = 0.7
+        static let outDuration: TimeInterval = 0.8
         
         static let initialTitleY: CGFloat = -80
         static let destinationTitleY = NumConst.attached

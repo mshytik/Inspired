@@ -1,11 +1,5 @@
 import UIKit
 
-// MARK: Accessors
-
-var appWindow: UIWindow? {
-    return (UIApplication.shared.delegate)?.window!
-}
-
 // MARK: AppDelegate
 
 @UIApplicationMain final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,9 +13,7 @@ var appWindow: UIWindow? {
         return true
     }
 
-    func applicationWillTerminate(_ application: UIApplication) {
-        DataService.shared.writeToDisk()
-    }
+    func applicationWillTerminate(_ application: UIApplication) { DataService.shared.writeToDisk() }
     
     // MARK: Configuration
     
