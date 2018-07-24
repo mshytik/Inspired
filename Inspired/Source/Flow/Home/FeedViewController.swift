@@ -1,36 +1,92 @@
 import UIKit
 
+// MARK: FeedViewController
+
 final class FeedViewController: ViewController {
     
+    // MARK: Properties
+    
+    private let collectionView = UICollectionView.vertical()
+    private var adapter: FeedCollectionAdapter?
+    
+    // MARK: Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
+        fetchPhotos()
+    }
+    
+    // MARK: Logic
+    
+    private func fetchPhotos() {
+        PhotosProvider.fetchPhotos { [weak self] in
+            guard let this = self else { return }
+            switch $0 {
+            case .success(let photos): this.adapter?.configure(photos: photos)
+            case .failure(let error): print(error)
+            }
+        }
+    }
+    
+    // MARK: Configuration
+    
+    private func configure() {
+        collectionView.addTo(view).tuned {
+            $0.width(Screen.bounds.width).height(Screen.bounds.height).cx(view).cy(view)
+            adapter = FeedCollectionAdapter(collectionView: $0)
+        }
+    }
 }
 
 // MARK: FeedCollectionAdapter
 
-//final class FeedCollectionAdapter: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//
-//    // MARK: Properties
-//    
-//    private let collectionView: UICollectionView
-//
-//    private var photos: [Photo] = [] {
-//        didSet { collectionView.reloadData() }
-//    }
-//
-//    // MARK: Init
-//
-//    init(collectionView: UICollectionView) {
-//        self.collectionView = collectionView.tuned {
-//            $0.register
-//        }
-//    }
-//
-//    // MARK: UICollectionViewDataSource
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return photos.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//}
+final class FeedCollectionAdapter: NSObject, CollectionSource {
+
+    // MARK: Properties
+    
+    private let collectionView: UICollectionView
+
+    private var photos: [Photo] = [] {
+        didSet { collectionView.reloadData() }
+    }
+
+    // MARK: Init
+
+    init(collectionView: UICollectionView) {
+        self.collectionView = collectionView
+        
+        super.init()
+        
+        collectionView.tuned {
+            $0.register(PhotoCell.self)
+            $0.dataSource = self
+            $0.delegate = self
+        }
+    }
+    
+    // MARK: Configure
+    
+    func configure(photos: [Photo]) {
+        self.photos = photos
+    }
+
+    // MARK: UICollectionViewDataSource
+
+    func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
+    }
+
+    func collectionView(_ view: UICollectionView, cellForItemAt path: IndexPath) -> UICollectionViewCell {
+        let cell: PhotoCell = collectionView.dequeue(path)
+        cell.configure(photo: photos[path.row])
+        return cell
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ view: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt path: IndexPath) -> CGSize {
+        let photo = photos[path.row]
+        return CGSize(width: Screen.bounds.width, height: photo.heightForFullWidth)
+    }
+}

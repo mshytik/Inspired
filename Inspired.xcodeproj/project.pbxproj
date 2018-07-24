@@ -182,9 +182,9 @@
 			isa = PBXGroup;
 			children = (
 				F9D415E721022C310051D73F /* AppDelegate.swift */,
-				F9D415E621022C310051D73F /* Config */,
-				F9D4161D210380420051D73F /* Model */,
 				F9D415E821022C310051D73F /* Flow */,
+				F9D4161D210380420051D73F /* Model */,
+				F9D415E621022C310051D73F /* Config */,
 				F9D415E321022C310051D73F /* Core */,
 			);
 			path = Source;

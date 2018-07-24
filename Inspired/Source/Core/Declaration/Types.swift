@@ -19,3 +19,7 @@ typealias LayoutPin = NSLayoutConstraint
 typealias Execution = () -> ()
 typealias Animation = Execution
 typealias OnComplete = (Bool) -> Void
+
+// MARK: Protocol
+
+typealias CollectionSource = UICollectionViewDataSource & UICollectionViewDelegateFlowLayout

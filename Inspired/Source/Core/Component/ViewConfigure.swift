@@ -38,5 +38,22 @@ extension UIButton {
 }
 
 extension UICollectionView {
+    static func vertical() -> UICollectionView {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = NumConst.attached
+        layout.minimumLineSpacing = NumConst.attached
+        layout.headerReferenceSize = .zero;
+        layout.footerReferenceSize = .zero;
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
+        return UICollectionView(frame: .zero, collectionViewLayout: layout)
+    }
     
+    func register<T: UICollectionViewCell>(_ type: T.Type) {
+        register(T.self, forCellWithReuseIdentifier: String(describing: type))
+    }
+    
+    func dequeue<T: UICollectionViewCell>(_ path: IndexPath) -> T {
+        return dequeueReusableCell(withReuseIdentifier: String(describing: T.self), for: path) as! T
+    }
 }

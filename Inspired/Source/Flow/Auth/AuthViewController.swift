@@ -22,8 +22,6 @@ final class AuthViewController: ViewController {
         super.viewDidLoad()
         configure()
         initialAnimation()
-        
-        PhotosProvider.fetchPhotos() { _ in }
     }
     
     // MARK: Animate
@@ -50,9 +48,15 @@ final class AuthViewController: ViewController {
             guard let this = self else { return }
             let animation: Animation = { this.bgViews.forEach { $0.alpha = Alpha.clear } }
             UIView.animate(withDuration: GUI.outDuration, animations: animation) { _ in
-                
+                this.navigateToRoot()
             }
         }
+    }
+    
+    // MARK: Navigation
+    
+    private func navigateToRoot() {
+        appWindow?.rootViewController = FeedViewController()
     }
     
     // MARK: Actions
