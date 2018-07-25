@@ -49,7 +49,7 @@ final class AuthManager {
             $0.path = "/oauth/authorize"
             $0.queryItems = [URLQueryItem(name: "response_type", value: "code"),
                              URLQueryItem(name: "client_id", value: appId),
-                             URLQueryItem(name: "redirect_uri", value: redirectEscaped),
+                             URLQueryItem(name: "redirect_uri", value: "urn:ietf:wg:oauth:2.0:oob"),
                              URLQueryItem(name: "scope", value: scopes.joined(separator: "+"))]
         }
         return components.url
@@ -63,7 +63,7 @@ final class AuthManager {
             $0.queryItems = [URLQueryItem(name: "grant_type", value: "authorization_code"),
                              URLQueryItem(name: "client_id", value: self.appId),
                              URLQueryItem(name: "client_secret", value: secret),
-                             URLQueryItem(name: "redirect_uri", value: redirectEscaped),
+                             URLQueryItem(name: "redirect_uri", value: "urn:ietf:wg:oauth:2.0:oob"),
                              URLQueryItem(name: "code", value: code)]
         }
         return components.url

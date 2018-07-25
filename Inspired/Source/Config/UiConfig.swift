@@ -28,6 +28,7 @@ enum Text {
     
     enum Common {
         static let cancel = "Cancel"
+        static let initNA = "init(coder:) has not been implemented"
     }
     
     enum Auth {

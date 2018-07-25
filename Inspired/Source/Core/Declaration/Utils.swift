@@ -43,6 +43,12 @@ extension URL {
     }
 }
 
+extension URLAuthenticationChallenge {
+    var isTrusted: Bool {
+        return protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust
+    }
+}
+
 // MARK: GCD
 
 func after(_ time: TimeInterval, _ execute: @escaping Execution) {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		67EDABA84E35C4C33210651C /* Pods_InspiredTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9578DC8A18E2E4ED75533E02 /* Pods_InspiredTests.framework */; };
 		D6C85B93D62008FF65C7D1A4 /* Pods_Inspired.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6DDD91FEB8FEAE5D5AF33 /* Pods_Inspired.framework */; };
+		F959E90F2108ED0B00EDE24E /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F959E90E2108ED0B00EDE24E /* NavigationController.swift */; };
 		F9D0ED3D210899BB0055D4CD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED3C210899BB0055D4CD /* KeychainService.swift */; };
 		F9D0ED4021089FBB0055D4CD /* FeedCollectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED3F21089FBB0055D4CD /* FeedCollectionAdapter.swift */; };
 		F9D0ED422108A2900055D4CD /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED412108A2900055D4CD /* AuthError.swift */; };
@@ -56,6 +57,7 @@
 		641893D2DDC0E9830689C1C6 /* Pods-Inspired.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspired.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspired/Pods-Inspired.release.xcconfig"; sourceTree = "<group>"; };
 		926E56601D5A5FEFC00AD989 /* Pods-Inspired.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspired.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspired/Pods-Inspired.debug.xcconfig"; sourceTree = "<group>"; };
 		9578DC8A18E2E4ED75533E02 /* Pods_InspiredTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InspiredTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F959E90E2108ED0B00EDE24E /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		F9D0ED3C210899BB0055D4CD /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		F9D0ED3F21089FBB0055D4CD /* FeedCollectionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionAdapter.swift; sourceTree = "<group>"; };
 		F9D0ED412108A2900055D4CD /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				F9D4160C210333530051D73F /* ViewConfigure.swift */,
 				F9D41613210356640051D73F /* Window.swift */,
 				F9D415E521022C310051D73F /* ViewController.swift */,
+				F959E90E2108ED0B00EDE24E /* NavigationController.swift */,
 				F9D416292104C6C70051D73F /* PhotoCell.swift */,
 			);
 			path = Component;
@@ -498,6 +501,7 @@
 				F9D416202103805C0051D73F /* FeedViewController.swift in Sources */,
 				F9D4160B210332880051D73F /* SplashViewController.swift in Sources */,
 				F9D0ED422108A2900055D4CD /* AuthError.swift in Sources */,
+				F959E90F2108ED0B00EDE24E /* NavigationController.swift in Sources */,
 				F9D0ED4021089FBB0055D4CD /* FeedCollectionAdapter.swift in Sources */,
 				F9D4160021023B060051D73F /* UiConfig.swift in Sources */,
 				F9D41612210351D60051D73F /* Utils.swift in Sources */,

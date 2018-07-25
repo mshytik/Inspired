@@ -32,7 +32,7 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
         self.view.backgroundColor = .white
     }
     
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder aDecoder: NSCoder) { fatalError(Text.Common.initNA) }
     
     // MARK: Lifecycle
     
@@ -74,15 +74,25 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView,
                  didReceive challenge: URLAuthenticationChallenge,
                  completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        if(challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust)
-        {
-            let cred = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-            completionHandler(.useCredential, cred)
-        }
-        else
-        {
-            completionHandler(.performDefaultHandling, nil)
-        }
+        guard challenge.isTrusted else { completionHandler(.performDefaultHandling, nil); return }
+        let credentials = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+        completionHandler(.useCredential, credentials)
+    }
+    
+    // MARK: Navigation
+    
+    @objc func cancel() {
+        dismissAuth(didCancel: true, animated: true)
+    }
+    
+    func dismissAuth(animated: Bool) {
+        dismissAuth(didCancel: false, animated: animated)
+    }
+    
+    func dismissAuth(didCancel: Bool, animated: Bool) {
+        webView.stopLoading()
+        dismissCompletion?(didCancel)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: Configuration
@@ -102,21 +112,5 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
             $0.left(view).top(view).height(Screen.bounds.height).width(Screen.bounds.width)
             $0.navigationDelegate = self
         }
-    }
-    
-    // MARK: Navigation
-    
-    @objc func cancel() {
-        dismissAuth(didCancel: true, animated: true)
-    }
-    
-    func dismissAuth(animated: Bool) {
-        dismissAuth(didCancel: false, animated: animated)
-    }
-    
-    func dismissAuth(didCancel: Bool, animated: Bool) {
-        webView.stopLoading()
-        dismissCompletion?(didCancel)
-        dismiss(animated: true, completion: nil)
     }
 }
