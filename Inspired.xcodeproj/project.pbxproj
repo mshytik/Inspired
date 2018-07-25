@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		67EDABA84E35C4C33210651C /* Pods_InspiredTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9578DC8A18E2E4ED75533E02 /* Pods_InspiredTests.framework */; };
 		D6C85B93D62008FF65C7D1A4 /* Pods_Inspired.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6DDD91FEB8FEAE5D5AF33 /* Pods_Inspired.framework */; };
+		F9D0ED3D210899BB0055D4CD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED3C210899BB0055D4CD /* KeychainService.swift */; };
+		F9D0ED4021089FBB0055D4CD /* FeedCollectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED3F21089FBB0055D4CD /* FeedCollectionAdapter.swift */; };
+		F9D0ED422108A2900055D4CD /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED412108A2900055D4CD /* AuthError.swift */; };
 		F9D415CF2101F7290051D73F /* InspiredTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415CE2101F7290051D73F /* InspiredTests.swift */; };
 		F9D415E921022C310051D73F /* Inspired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9D415DA21022C310051D73F /* Inspired.xcdatamodeld */; };
 		F9D415EA21022C310051D73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9D415DC21022C310051D73F /* Assets.xcassets */; };
@@ -18,18 +21,16 @@
 		F9D415F22102318B0051D73F /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F12102318B0051D73F /* DataService.swift */; };
 		F9D415F5210233D90051D73F /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F4210233D90051D73F /* Types.swift */; };
 		F9D415F7210234E10051D73F /* PathConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F6210234E10051D73F /* PathConfig.swift */; };
-		F9D415F9210238690051D73F /* Tuned.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415F8210238690051D73F /* Tuned.swift */; };
 		F9D415FC210239AC0051D73F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FB210239AC0051D73F /* Environment.swift */; };
 		F9D415FE21023A730051D73F /* ViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FD21023A730051D73F /* ViewLayout.swift */; };
 		F9D4160021023B060051D73F /* UiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D415FF21023B060051D73F /* UiConfig.swift */; };
-		F9D4160221024D8F0051D73F /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160121024D8F0051D73F /* Open.swift */; };
 		F9D41609210331F70051D73F /* splash1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F9D41608210331F60051D73F /* splash1.jpeg */; };
 		F9D4160B210332880051D73F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160A210332880051D73F /* SplashViewController.swift */; };
 		F9D4160D210333530051D73F /* ViewConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160C210333530051D73F /* ViewConfigure.swift */; };
-		F9D41610210350FD0051D73F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160F210350FD0051D73F /* AuthViewController.swift */; };
+		F9D41610210350FD0051D73F /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4160F210350FD0051D73F /* LandingViewController.swift */; };
 		F9D41612210351D60051D73F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D41611210351D60051D73F /* Utils.swift */; };
 		F9D41614210356640051D73F /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D41613210356640051D73F /* Window.swift */; };
-		F9D416162103663E0051D73F /* UnsplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D416152103663E0051D73F /* UnsplashViewController.swift */; };
+		F9D416162103663E0051D73F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D416152103663E0051D73F /* AuthViewController.swift */; };
 		F9D4161921036EBB0051D73F /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4161821036EBB0051D73F /* AuthManager.swift */; };
 		F9D416202103805C0051D73F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D4161F2103805C0051D73F /* FeedViewController.swift */; };
 		F9D41624210382590051D73F /* PhotosProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D41623210382590051D73F /* PhotosProvider.swift */; };
@@ -55,6 +56,9 @@
 		641893D2DDC0E9830689C1C6 /* Pods-Inspired.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspired.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspired/Pods-Inspired.release.xcconfig"; sourceTree = "<group>"; };
 		926E56601D5A5FEFC00AD989 /* Pods-Inspired.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspired.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspired/Pods-Inspired.debug.xcconfig"; sourceTree = "<group>"; };
 		9578DC8A18E2E4ED75533E02 /* Pods_InspiredTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InspiredTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9D0ED3C210899BB0055D4CD /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		F9D0ED3F21089FBB0055D4CD /* FeedCollectionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionAdapter.swift; sourceTree = "<group>"; };
+		F9D0ED412108A2900055D4CD /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		F9D415B32101F7280051D73F /* Inspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D415CA2101F7290051D73F /* InspiredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspiredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D415CE2101F7290051D73F /* InspiredTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspiredTests.swift; sourceTree = "<group>"; };
@@ -68,18 +72,16 @@
 		F9D415F12102318B0051D73F /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F9D415F4210233D90051D73F /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		F9D415F6210234E10051D73F /* PathConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathConfig.swift; sourceTree = "<group>"; };
-		F9D415F8210238690051D73F /* Tuned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuned.swift; sourceTree = "<group>"; };
 		F9D415FB210239AC0051D73F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F9D415FD21023A730051D73F /* ViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayout.swift; sourceTree = "<group>"; };
 		F9D415FF21023B060051D73F /* UiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiConfig.swift; sourceTree = "<group>"; };
-		F9D4160121024D8F0051D73F /* Open.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Open.swift; sourceTree = "<group>"; };
 		F9D41608210331F60051D73F /* splash1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash1.jpeg; sourceTree = "<group>"; };
 		F9D4160A210332880051D73F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F9D4160C210333530051D73F /* ViewConfigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConfigure.swift; sourceTree = "<group>"; };
-		F9D4160F210350FD0051D73F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		F9D4160F210350FD0051D73F /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		F9D41611210351D60051D73F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F9D41613210356640051D73F /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
-		F9D416152103663E0051D73F /* UnsplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashViewController.swift; sourceTree = "<group>"; };
+		F9D416152103663E0051D73F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F9D4161821036EBB0051D73F /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F9D4161F2103805C0051D73F /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		F9D41623210382590051D73F /* PhotosProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosProvider.swift; sourceTree = "<group>"; };
@@ -126,6 +128,14 @@
 				4EC669E027FC5F99AE2E5927 /* Pods-InspiredTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F9D0ED3E21089F920055D4CD /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				F9D0ED3F21089FBB0055D4CD /* FeedCollectionAdapter.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		F9D415AA2101F7280051D73F = {
@@ -203,9 +213,9 @@
 		F9D415E421022C310051D73F /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				F9D41613210356640051D73F /* Window.swift */,
 				F9D415FD21023A730051D73F /* ViewLayout.swift */,
 				F9D4160C210333530051D73F /* ViewConfigure.swift */,
+				F9D41613210356640051D73F /* Window.swift */,
 				F9D415E521022C310051D73F /* ViewController.swift */,
 				F9D416292104C6C70051D73F /* PhotoCell.swift */,
 			);
@@ -235,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				F9D415F12102318B0051D73F /* DataService.swift */,
+				F9D0ED3C210899BB0055D4CD /* KeychainService.swift */,
 				F9D41625210382EE0051D73F /* NetworkService.swift */,
 			);
 			path = Service;
@@ -244,8 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				F9D415F4210233D90051D73F /* Types.swift */,
-				F9D4160121024D8F0051D73F /* Open.swift */,
-				F9D415F8210238690051D73F /* Tuned.swift */,
 				F9D415FB210239AC0051D73F /* Environment.swift */,
 				F9D41611210351D60051D73F /* Utils.swift */,
 			);
@@ -256,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				F9D4160A210332880051D73F /* SplashViewController.swift */,
+				F9D4160F210350FD0051D73F /* LandingViewController.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -271,9 +281,8 @@
 		F9D4160E210350920051D73F /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				F9D416152103663E0051D73F /* AuthViewController.swift */,
 				F9D4161721036E850051D73F /* Component */,
-				F9D4160F210350FD0051D73F /* AuthViewController.swift */,
-				F9D416152103663E0051D73F /* UnsplashViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -281,6 +290,7 @@
 		F9D4161721036E850051D73F /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				F9D0ED412108A2900055D4CD /* AuthError.swift */,
 				F9D4161821036EBB0051D73F /* AuthManager.swift */,
 			);
 			path = Component;
@@ -298,6 +308,7 @@
 		F9D4161E2103805C0051D73F /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F9D0ED3E21089F920055D4CD /* Component */,
 				F9D4161F2103805C0051D73F /* FeedViewController.swift */,
 			);
 			path = Home;
@@ -486,17 +497,18 @@
 				F9D415EF21022C310051D73F /* AppDelegate.swift in Sources */,
 				F9D416202103805C0051D73F /* FeedViewController.swift in Sources */,
 				F9D4160B210332880051D73F /* SplashViewController.swift in Sources */,
+				F9D0ED422108A2900055D4CD /* AuthError.swift in Sources */,
+				F9D0ED4021089FBB0055D4CD /* FeedCollectionAdapter.swift in Sources */,
 				F9D4160021023B060051D73F /* UiConfig.swift in Sources */,
 				F9D41612210351D60051D73F /* Utils.swift in Sources */,
 				F9D415F7210234E10051D73F /* PathConfig.swift in Sources */,
 				F9D415EE21022C310051D73F /* ViewController.swift in Sources */,
 				F9D415FE21023A730051D73F /* ViewLayout.swift in Sources */,
-				F9D4160221024D8F0051D73F /* Open.swift in Sources */,
 				F9D4162A2104C6C70051D73F /* PhotoCell.swift in Sources */,
-				F9D415F9210238690051D73F /* Tuned.swift in Sources */,
 				F9D41626210382EE0051D73F /* NetworkService.swift in Sources */,
-				F9D416162103663E0051D73F /* UnsplashViewController.swift in Sources */,
-				F9D41610210350FD0051D73F /* AuthViewController.swift in Sources */,
+				F9D416162103663E0051D73F /* AuthViewController.swift in Sources */,
+				F9D41610210350FD0051D73F /* LandingViewController.swift in Sources */,
+				F9D0ED3D210899BB0055D4CD /* KeychainService.swift in Sources */,
 				F9D415F5210233D90051D73F /* Types.swift in Sources */,
 				F9D4160D210333530051D73F /* ViewConfigure.swift in Sources */,
 				F9D416282103B6D40051D73F /* Photo.swift in Sources */,
@@ -657,6 +669,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Inspired/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -675,6 +688,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Inspired/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

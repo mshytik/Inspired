@@ -11,7 +11,8 @@ final class PhotosProvider {
     // MARK: Interface
     
     static func fetchPhotos(completion: @escaping PhotosCompletion) {
-        NetworkService.request(PathConfig.photos, .get) { result in
+        guard let url = URL(string: PathConfig.photos) else { return }
+        NetworkService.request(url, .get) { result in
             mainThread {
                 switch result {
                 case .success(let jsonResponse):

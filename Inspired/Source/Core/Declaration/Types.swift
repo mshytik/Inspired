@@ -1,4 +1,5 @@
 import UIKit
+import WebKit
 
 // MARK: Data
 
@@ -19,6 +20,7 @@ typealias LayoutPin = NSLayoutConstraint
 typealias Execution = () -> ()
 typealias Animation = Execution
 typealias OnComplete = (Bool) -> Void
+typealias PolicyComplete = (WKNavigationActionPolicy) -> Void
 
 // MARK: Protocol
 

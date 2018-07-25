@@ -1,121 +1,122 @@
 import UIKit
+import WebKit
 
 // MARK: AuthViewController
 
-final class AuthViewController: ViewController {
+final class AuthViewController: ViewController, WKNavigationDelegate {
+    
+    // MARK: Types
+    
+    typealias UrlCompletion = (URL) -> Void
     
     // MARK: Properties
     
-    private let bgImageView = UIImageView()
-    private let coverView = UIView()
-    private let titleLabel = UILabel()
-    private let loginButton = UIButton(type: .custom)
-    private let viewButton = UIButton(type: .custom)
-    private var titleCyPin: LayoutPin?
+    let startUrl: URL
+    let dismissUrl: URL
     
-    private var fadeViews: [UIView] { return [titleLabel, loginButton, viewButton] }
-    private var bgViews: [UIView] { return [view, bgImageView, coverView] }
+    var dismissCompletion: OnComplete?
+    var urlMatchCompletion: UrlCompletion?
+    
+    private let webView = WKWebView()
+    private let cancelButton = UIBarButtonItem(title: Text.Common.cancel,
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(cancel))
+    
+    // MARK: Init
+    
+    init(startUrl: URL, dismissUrl: URL) {
+        self.startUrl = startUrl
+        self.dismissUrl = dismissUrl
+        super.init(nibName: nil, bundle: nil)
+        self.view.backgroundColor = .white
+    }
+    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        initialAnimation()
     }
     
-    // MARK: Animate
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !webView.canGoBack { load(url: startUrl) }
+    }
     
-    private func initialAnimation() {
-        after(GUI.initialDelay) { [weak self] in
-            UIView.animate(withDuration: GUI.darkDuration,
-                           animations: { self?.coverView.alpha = Alpha.opaque },
-                           completion: { _ in self?.animateTitle() })
+    // MARK: Logic (url handling)
+    
+    private func load(url: URL) {
+        webView.load(URLRequest(url: url))
+    }
+    
+    private func matchesDismissUrl(_ url: URL) -> Bool {
+        return url.scheme == dismissUrl.scheme && url.host == dismissUrl.host && url.path == dismissUrl.path
+    }
+    
+    // MARK: WKNavigationDelegate
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print(error)
+    }
+    
+    private func webView(webView: WKWebView,
+                 decidePolicyForNavigationAction action: WKNavigationAction,
+                 decisionHandler: PolicyComplete) {
+        guard let url = action.request.url, matchesDismissUrl(url) else { decisionHandler(.allow); return }
+        urlMatchCompletion?(url)
+        dismissAuth(animated: true)
+        decisionHandler(.cancel)
+    }
+    
+    func webView(_ webView: WKWebView,
+                 didReceive challenge: URLAuthenticationChallenge,
+                 completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if(challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust)
+        {
+            let cred = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+            completionHandler(.useCredential, cred)
+        }
+        else
+        {
+            completionHandler(.performDefaultHandling, nil)
         }
     }
     
-    private func animateTitle() {
-        titleCyPin?.constant = GUI.destinationTitleY
-        UIView.animate(withDuration: GUI.titleDuration) {
-            self.view.layoutIfNeeded()
-            self.fadeViews.forEach { $0.alpha = Alpha.opaque }
-        }
-    }
+    // MARK: Configuration
     
-    private func animateToHome() {
-        let animation: Animation = { self.fadeViews.forEach { $0.alpha = Alpha.clear } }
-        UIView.animate(withDuration: GUI.outDuration, animations: animation) { [weak self] _ in
-            guard let this = self else { return }
-            let animation: Animation = { this.bgViews.forEach { $0.alpha = Alpha.clear } }
-            UIView.animate(withDuration: GUI.outDuration, animations: animation) { _ in
-                this.navigateToRoot()
-            }
+    private func configure() {
+        tuned {
+            $0.title = Text.Auth.title
+            $0.view.backgroundColor = .white
+            $0.navigationItem.rightBarButtonItem = cancelButton
+
+            guard let frame = cancelButton.customView?.frame else { return }
+            let destFrame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height)
+            cancelButton.customView?.frame = destFrame
+        }
+        
+        webView.addTo(view).tuned {
+            $0.left(view).top(view).height(Screen.bounds.height).width(Screen.bounds.width)
+            $0.navigationDelegate = self
         }
     }
     
     // MARK: Navigation
     
-    private func navigateToRoot() {
-        appWindow?.rootViewController = FeedViewController()
+    @objc func cancel() {
+        dismissAuth(didCancel: true, animated: true)
     }
     
-    // MARK: Actions
-    
-    @objc func viewTap() {
-        animateToHome()
+    func dismissAuth(animated: Bool) {
+        dismissAuth(didCancel: false, animated: animated)
     }
     
-    // MARK: Configure
-    
-    private func configure() {
-        tuned {
-            $0.fadeViews.forEach { $0.alpha = Alpha.clear }
-        }
-        
-        bgImageView.addTo(view).tuned {
-            $0.cx(view).cy(view).width(Screen.bounds.width).height(Screen.bounds.height)
-            $0.configureFill()
-            $0.image = Image.splash
-        }
-        
-        coverView.addTo(view).tuned {
-            $0.cx(view).cy(view).width(Screen.bounds.width).height(Screen.bounds.height)
-            $0.backgroundColor = Color.darkOverlay
-            $0.alpha = Alpha.clear
-        }
-        
-        titleLabel.addTo(view).tuned {
-            $0.cx(view)
-            titleCyPin = $0.pinCy(view, GUI.initialTitleY)
-            $0.text = Text.appTitle.uppercased()
-            $0.font = Font.bigTitle
-            $0.textColor = .white
-        }
-        
-        viewButton.addTo(view).tuned {
-            $0.configureBordered()
-            $0.bottom(view, -GUI.buttonOffset).cx(view)
-            $0.setTitle(Text.Auth.view, for: .normal)
-            $0.addTarget(self, action: #selector(viewTap), for: .touchUpInside)
-        }
-        
-        loginButton.addTo(view).tuned {
-            $0.configureBordered()
-            $0.above(viewButton, -GUI.buttonOffset / 2).cx(view)
-            $0.setTitle(Text.Auth.auth, for: .normal)
-        }
-    }
-    
-    // MARK: GUI
-    
-    private enum GUI {
-        static let initialDelay: TimeInterval = 0.3
-        static let darkDuration: TimeInterval = 0.55
-        static let titleDuration: TimeInterval = 0.7
-        static let outDuration: TimeInterval = 0.8
-        
-        static let initialTitleY: CGFloat = -80
-        static let destinationTitleY = NumConst.attached
-        static let buttonOffset: CGFloat = 50
+    func dismissAuth(didCancel: Bool, animated: Bool) {
+        webView.stopLoading()
+        dismissCompletion?(didCancel)
+        dismiss(animated: true, completion: nil)
     }
 }

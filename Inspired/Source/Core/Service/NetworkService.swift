@@ -27,15 +27,10 @@ final class NetworkService {
     
     // MARK: Public
     
-    @discardableResult static func request(_ url: String,
+    @discardableResult static func request(_ url: URL,
                                            _ method: Method,
                                            _ params: Json? = nil,
                                            _ callback: @escaping JsonCallback) -> URLSessionTask? {
-        guard let url = URL(string: url) else {
-            callback(.failure(error: defaultError(code: NetworkError.Code.badUrl)))
-            return nil
-        }
-        
         var data: Data?
         if let params = params {
             do {

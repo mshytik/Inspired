@@ -15,17 +15,14 @@ final class SplashViewController: ViewController {
     // MARK: Logic
     
     private func dispatchInitialFlow() {
-        after(GUI.dispatchDelay) {
-            appWindow?.rootViewController = AuthViewController()
-        }
+        after(GUI.dispatchDelay) { appWindow?.rootViewController = LandingViewController() }
     }
     
     // MARK: Configuration
     
     private func configure() {
         UIImageView().addTo(view).tuned {
-            $0.cx(view).cy(view)
-            $0.width(Screen.bounds.width).height(Screen.bounds.height)
+            $0.cx(view).cy(view).width(Screen.bounds.width).height(Screen.bounds.height)
             $0.configureFill()
             $0.image = Image.splash
         }

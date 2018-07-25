@@ -24,11 +24,15 @@ enum Font {
 // MARK: Text
 
 enum Text {
-    
     static let appTitle = "Inspiration"
+    
+    enum Common {
+        static let cancel = "Cancel"
+    }
     
     enum Auth {
         static let view = "Inspire Now!"
         static let auth = "Login with Unsplash"
+        static let title = auth
     }
 }
