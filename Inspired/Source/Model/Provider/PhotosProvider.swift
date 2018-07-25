@@ -16,6 +16,7 @@ final class PhotosProvider {
             mainThread {
                 switch result {
                 case .success(let jsonResponse):
+                    print(jsonResponse)
                     switch jsonResponse {
                     case .single(let json): completion(.success(value: [Photo(json: json)]))
                     case .array(let jsons): completion(.success(value: jsons.map { Photo(json: $0) }))

@@ -26,7 +26,7 @@ extension UIView {
     @discardableResult
     func pinRight(_ toView: UIView, _ offset: CGFloat = zero) -> LayoutPin? { return pin(.trailing, toView, .trailing, offset) }
     @discardableResult
-    func right(_ toView: UIView, _ offset: CGFloat = zero) -> Self { pinBottom(toView, offset); return self }
+    func right(_ toView: UIView, _ offset: CGFloat = zero) -> Self { pinRight(toView, offset); return self }
     
     @discardableResult
     func pinAbove(_ toView: UIView, _ offset: CGFloat = zero) -> LayoutPin? { return pin(.bottom, toView, .top, offset) }

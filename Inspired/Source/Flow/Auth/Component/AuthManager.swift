@@ -93,7 +93,7 @@ final class AuthManager {
                 self?.fetchToken(from: url, completion: completion)
             }
             
-            let navVc = UINavigationController(rootViewController: $0)
+            let navVc = NavigationController(rootViewController: $0)
             controller.present(navVc, animated: true, completion: nil)
         }
     }

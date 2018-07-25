@@ -32,9 +32,16 @@ final class FeedViewController: ViewController {
     // MARK: Configuration
     
     private func configure() {
+        title = "Guest"
+        
+        view.tuned {
+            $0.backgroundColor = .white
+        }
+        
         collectionView.addTo(view).tuned {
-            $0.width(Screen.bounds.width).height(Screen.bounds.height).cx(view).cy(view)
+            $0.width(Screen.bounds.width).height(Screen.bounds.height).top(view).left(view)
             adapter = FeedCollectionAdapter(collectionView: $0)
+            $0.backgroundColor = .white
         }
     }
 }

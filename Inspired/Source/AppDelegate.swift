@@ -13,12 +13,15 @@ import UIKit
         return true
     }
 
-    func applicationWillTerminate(_ application: UIApplication) { DataService.shared.writeToDisk() }
+    func applicationWillTerminate(_ application: UIApplication) {
+        DataService.shared.writeToDisk()
+    }
     
     // MARK: Configuration
     
     private func configureApp() {
         configureWindow()
+        NavigationController.applyDefaultAppearance()
     }
     
     private func configureWindow() {

@@ -10,6 +10,8 @@
 		67EDABA84E35C4C33210651C /* Pods_InspiredTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9578DC8A18E2E4ED75533E02 /* Pods_InspiredTests.framework */; };
 		D6C85B93D62008FF65C7D1A4 /* Pods_Inspired.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6DDD91FEB8FEAE5D5AF33 /* Pods_Inspired.framework */; };
 		F959E90F2108ED0B00EDE24E /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F959E90E2108ED0B00EDE24E /* NavigationController.swift */; };
+		F9B1D62821093C12006FAD5A /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B1D62721093C12006FAD5A /* download.png */; };
+		F9B1D62A21093E1E006FAD5A /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B1D62921093E1E006FAD5A /* like.png */; };
 		F9D0ED3D210899BB0055D4CD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED3C210899BB0055D4CD /* KeychainService.swift */; };
 		F9D0ED4021089FBB0055D4CD /* FeedCollectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED3F21089FBB0055D4CD /* FeedCollectionAdapter.swift */; };
 		F9D0ED422108A2900055D4CD /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0ED412108A2900055D4CD /* AuthError.swift */; };
@@ -58,6 +60,8 @@
 		926E56601D5A5FEFC00AD989 /* Pods-Inspired.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspired.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspired/Pods-Inspired.debug.xcconfig"; sourceTree = "<group>"; };
 		9578DC8A18E2E4ED75533E02 /* Pods_InspiredTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InspiredTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F959E90E2108ED0B00EDE24E /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		F9B1D62721093C12006FAD5A /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
+		F9B1D62921093E1E006FAD5A /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		F9D0ED3C210899BB0055D4CD /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		F9D0ED3F21089FBB0055D4CD /* FeedCollectionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionAdapter.swift; sourceTree = "<group>"; };
 		F9D0ED412108A2900055D4CD /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 		F9D4160521025BC60051D73F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				F9B1D62921093E1E006FAD5A /* like.png */,
+				F9B1D62721093C12006FAD5A /* download.png */,
 				F9D41608210331F60051D73F /* splash1.jpeg */,
 			);
 			path = Image;
@@ -418,8 +424,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9D41609210331F70051D73F /* splash1.jpeg in Resources */,
+				F9B1D62A21093E1E006FAD5A /* like.png in Resources */,
 				F9D415EA21022C310051D73F /* Assets.xcassets in Resources */,
 				F9D415EB21022C310051D73F /* LaunchScreen.storyboard in Resources */,
+				F9B1D62821093C12006FAD5A /* download.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

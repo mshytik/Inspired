@@ -90,9 +90,11 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     }
     
     func dismissAuth(didCancel: Bool, animated: Bool) {
-        webView.stopLoading()
-        dismissCompletion?(didCancel)
-        navigationController?.dismiss(animated: true, completion: nil)
+        mainThread {
+            self.webView.stopLoading()
+            self.dismissCompletion?(didCancel)
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: Configuration

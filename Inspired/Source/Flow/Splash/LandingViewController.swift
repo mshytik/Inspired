@@ -47,9 +47,7 @@ final class LandingViewController: ViewController {
         UIView.animate(withDuration: GUI.outDuration, animations: animation) { [weak self] _ in
             guard let this = self else { return }
             let animation: Animation = { this.bgViews.forEach { $0.alpha = Alpha.clear } }
-            UIView.animate(withDuration: GUI.outDuration, animations: animation) { _ in
-                appWindow?.rootViewController = FeedViewController()
-            }
+            UIView.animate(withDuration: GUI.outDuration, animations: animation) { _ in this.toFeed() }
         }
     }
     
@@ -61,6 +59,14 @@ final class LandingViewController: ViewController {
     
     @objc func viewTap() {
         animateToHome()
+    }
+    
+    private func toFeed() {
+        let vc = FeedViewController()
+        let navVc = NavigationController(rootViewController: vc)
+        navVc.view.alpha = 0
+        appWindow?.rootViewController = navVc
+        UIView.animate(withDuration: 0.3) { navVc.view.alpha = 1 }
     }
     
     // MARK: Configure

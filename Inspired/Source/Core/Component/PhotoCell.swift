@@ -8,6 +8,7 @@ final class PhotoCell: UICollectionViewCell {
     // MARK: Properties
     
     private let photoImageView = UIImageView()
+    private let titleLabel = UILabel()
     private var heightPin: LayoutPin?
     
     // MARK: Init
@@ -40,6 +41,25 @@ final class PhotoCell: UICollectionViewCell {
             $0.width(Screen.bounds.width).top(contentView).left(contentView).bottom(photoImageView)
             $0.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         }
+        
+        titleLabel.addTo(contentView).tuned {
+            $0.bottom(photoImageView, -8).left(photoImageView, 16)
+            $0.textColor = .white
+            $0.font = Font.photoAuthor
+            $0.textAlignment = .left
+        }
+        
+        UIButton(type: .custom).addTo(contentView).tuned {
+            $0.cy(titleLabel, -8).right(photoImageView, -16).width(35).height(35)
+            $0.setImage(Image.downloadPhoto.withRenderingMode(.alwaysTemplate), for: .normal)
+            $0.tintColor = UIColor.white.withAlphaComponent(0.65)
+        }
+        
+        UIImageView().addTo(contentView).tuned {
+            $0.top(photoImageView, 16).right(photoImageView, -16).width(35).height(35)
+            $0.image = Image.like.withRenderingMode(.alwaysTemplate)
+            $0.tintColor = UIColor.white.withAlphaComponent(0.65)
+        }
     }
     
     // MARK: Lifecycle
@@ -53,6 +73,7 @@ final class PhotoCell: UICollectionViewCell {
     // MARK: Configuration
     
     func configure(photo: Photo) {
+        titleLabel.text = photo.name
         guard let url = URL(string: photo.regularUrl) else { return }
         heightPin?.constant = photo.heightForFullWidth
         Nuke.loadImage(with: url, into: photoImageView)
