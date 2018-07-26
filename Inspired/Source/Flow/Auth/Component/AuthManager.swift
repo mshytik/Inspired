@@ -94,6 +94,7 @@ final class AuthManager {
             }
             
             let navVc = NavigationController(rootViewController: $0)
+            navVc.modalPresentationStyle = .overFullScreen
             controller.present(navVc, animated: true, completion: nil)
         }
     }

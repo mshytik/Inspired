@@ -7,6 +7,7 @@ enum Alpha {
     static let disabled: CGFloat = 0.3
     static let highlighted: CGFloat = 0.45
     static let opaque: CGFloat = 1
+    static func isVisible(_ visible: Bool) -> CGFloat { return visible ? opaque : clear }
 }
 
 func rgb(_ r: Int, _ g: Int, _ b: Int, _ a: CGFloat = Alpha.opaque) -> UIColor {

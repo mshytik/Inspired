@@ -21,11 +21,7 @@ final class SplashViewController: ViewController {
     // MARK: Configuration
     
     private func configure() {
-        UIImageView().addTo(view).tuned {
-            $0.cx(view).cy(view).width(Screen.bounds.width).height(Screen.bounds.height)
-            $0.configureFill()
-            $0.image = Image.splash
-        }
+        UIImageView(image: Image.splash).addTo(view).fillParent().configureFill()
     }
     
     // MARK: GUI

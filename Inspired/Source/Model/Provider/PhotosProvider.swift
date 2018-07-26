@@ -15,16 +15,19 @@ final class PhotosProvider {
         NetworkService.request(url, .get) { result in
             mainThread {
                 switch result {
-                case .success(let jsonResponse):
-                    print(jsonResponse)
-                    switch jsonResponse {
-                    case .single(let json): completion(.success(value: [Photo(json: json)]))
-                    case .array(let jsons): completion(.success(value: jsons.map { Photo(json: $0) }))
-                    }
+                case .success(let response): completion(.success(value: photos(with: response)))
                 case .failure(let error): completion(.failure(error: error))
                 }
             }
         }
     }
     
+    // MARK: Helper
+    
+    private static func photos(with response: NetworkService.JsonResponse) -> [Photo] {
+        switch response {
+        case .single(let json): return [Photo(json: json)]
+        case .array(let jsons): return jsons.map { Photo(json: $0) }
+        }
+    }
 }

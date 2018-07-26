@@ -41,6 +41,10 @@ extension URL {
         queryItems.forEach { parameters[$0.name] = $0.value }
         return parameters
     }
+    
+    func matches(_ url: URL) -> Bool {
+        return (scheme == url.scheme) && (host == url.host) && (path == url.path)
+    }
 }
 
 extension URLAuthenticationChallenge {
@@ -72,5 +76,6 @@ func after(_ time: TimeInterval, _ execute: @escaping Execution) {
 }
 
 func mainThread(_ execute: @escaping Execution) {
-    DispatchQueue.main.async(execute: execute)
+    guard !Thread.isMainThread else { execute(); return }
+    DispatchQueue.main.sync(execute: execute)
 }

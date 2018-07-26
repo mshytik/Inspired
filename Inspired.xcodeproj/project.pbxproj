@@ -314,8 +314,8 @@
 		F9D4160E210350920051D73F /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				F9D416152103663E0051D73F /* AuthViewController.swift */,
 				F9D4161721036E850051D73F /* Component */,
+				F9D416152103663E0051D73F /* AuthViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";

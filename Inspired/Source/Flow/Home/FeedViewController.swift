@@ -35,7 +35,7 @@ final class FeedViewController: ViewController {
         title = "Guest"
         
         view.tuned {
-            $0.backgroundColor = .white
+            $0.backgroundColor = Color.navBg.withAlphaComponent(0.65)
         }
         
         collectionView.addTo(view).tuned {

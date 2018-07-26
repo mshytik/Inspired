@@ -19,12 +19,11 @@ enum Color {
 
 enum Font {
     static let bigTitle = basic(55)
-    static let photoAuthor = basic(29)
-    static let navTitle = basic(23)
+    static let photoAuthor = basic(21)
+    static let navTitle = basic(21)
     static let borderButton = basic(21)
-    static let barButton = basic(15)
-    
-    static func basic(_ size: CGFloat) -> UIFont { return UIFont(name: "Papyrus", size: size)! }
+    static let barButton = basic(17)
+    static func basic(_ size: CGFloat) -> UIFont { return UIFont(name: "AvenirNext-Regular", size: size)! }
 }
 
 // MARK: Text

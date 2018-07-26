@@ -27,36 +27,36 @@ final class PhotoCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         
         photoImageView.addTo(contentView).tuned {
-            $0.width(Screen.bounds.width).top(contentView).left(contentView)
-            heightPin = $0.pinHeight(NumConst.attached)
-            $0.configureFill()
+            $0.fillParent().configureFill()
         }
         
-        UIView().addTo(contentView).tuned {
-            $0.width(Screen.bounds.width).height(3).top(contentView).left(contentView)
+        let root = UIView().addTo(contentView).tuned {
+            $0.left(contentView).top(contentView).width(Screen.bounds.width)
+            heightPin = $0.pinHeight(GUI.defaultRootHeight)
+        }
+        
+        UIView().addTo(root).tuned {
+            $0.bottom(root).left(root).width(Screen.bounds.width).height(0.5)
             $0.backgroundColor = .black
         }
         
-        UIView().addTo(contentView).tuned {
-            $0.width(Screen.bounds.width).top(contentView).left(contentView).bottom(photoImageView)
-            $0.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        let bottomRoot = UIView().addTo(root).tuned {
+            $0.bottom(root).left(root).right(root).height(60)
+            $0.backgroundColor = UIColor.black.withAlphaComponent(0.55)
         }
         
-        titleLabel.addTo(contentView).tuned {
-            $0.bottom(photoImageView, -8).left(photoImageView, 16)
-            $0.textColor = .white
-            $0.font = Font.photoAuthor
-            $0.textAlignment = .left
+        titleLabel.addTo(bottomRoot).tuned {
+            $0.left(bottomRoot, 16).cy(bottomRoot).update(Font.photoAuthor, .white)
         }
         
-        UIButton(type: .custom).addTo(contentView).tuned {
-            $0.cy(titleLabel, -8).right(photoImageView, -16).width(35).height(35)
+        let loadButton = UIButton(type: .custom).addTo(bottomRoot).tuned {
+            $0.cy(titleLabel).right(bottomRoot, -16).width(30).height(30)
             $0.setImage(Image.downloadPhoto.withRenderingMode(.alwaysTemplate), for: .normal)
             $0.tintColor = UIColor.white.withAlphaComponent(0.65)
         }
         
-        UIImageView().addTo(contentView).tuned {
-            $0.top(photoImageView, 16).right(photoImageView, -16).width(35).height(35)
+        UIImageView().addTo(bottomRoot).tuned {
+            $0.cy(titleLabel, -2).before(loadButton, -24).width(30).height(30)
             $0.image = Image.like.withRenderingMode(.alwaysTemplate)
             $0.tintColor = UIColor.white.withAlphaComponent(0.65)
         }
@@ -66,16 +66,34 @@ final class PhotoCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        Nuke.cancelRequest(for: photoImageView)
-        photoImageView.image = nil
+        clearImage()
     }
     
     // MARK: Configuration
     
     func configure(photo: Photo) {
         titleLabel.text = photo.name
-        guard let url = URL(string: photo.regularUrl) else { return }
         heightPin?.constant = photo.heightForFullWidth
-        Nuke.loadImage(with: url, into: photoImageView)
+        configure(imageUrlString: photo.regularUrl)
+    }
+    
+    private func configure(imageUrlString: String) {
+        guard let url = URL(string: imageUrlString) else { clearImage(); return }
+        Nuke.loadImage(with: url, options: GUI.imageOptions, into: photoImageView)
+    }
+    
+    private func clearImage() {
+        Nuke.cancelRequest(for: photoImageView)
+        photoImageView.image = nil
+    }
+    
+    // MARK: GUI
+    
+    private enum GUI {
+        static let defaultRootHeight: CGFloat = 300
+        
+        static var imageOptions: ImageLoadingOptions {
+            return ImageLoadingOptions(transition: ImageLoadingOptions.Transition.fadeIn(duration: 0.3))
+        }
     }
 }

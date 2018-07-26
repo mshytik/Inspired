@@ -8,6 +8,8 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     // MARK: Types
     
     typealias UrlCompletion = (URL) -> Void
+    typealias Challenge = URLAuthenticationChallenge
+    typealias ChallengeCompletion = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
     
     // MARK: Properties
     
@@ -18,10 +20,7 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     var urlMatchCompletion: UrlCompletion?
     
     private let webView = WKWebView()
-    private let cancelButton = UIBarButtonItem(title: Text.Common.cancel,
-                                               style: .plain,
-                                               target: self,
-                                               action: #selector(cancel))
+    private var cancelButton: UIBarButtonItem?
     
     // MARK: Init
     
@@ -43,37 +42,21 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !webView.canGoBack { load(url: startUrl) }
-    }
-    
-    // MARK: Logic (url handling)
-    
-    private func load(url: URL) {
-        webView.load(URLRequest(url: url))
-    }
-    
-    private func matchesDismissUrl(_ url: URL) -> Bool {
-        return url.scheme == dismissUrl.scheme && url.host == dismissUrl.host && url.path == dismissUrl.path
+        if !webView.canGoBack { webView.load(URLRequest(url: startUrl)) }
     }
     
     // MARK: WKNavigationDelegate
     
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print(error)
-    }
-    
     private func webView(webView: WKWebView,
                  decidePolicyForNavigationAction action: WKNavigationAction,
                  decisionHandler: PolicyComplete) {
-        guard let url = action.request.url, matchesDismissUrl(url) else { decisionHandler(.allow); return }
+        guard let url = action.request.url, url.matches(dismissUrl) else { decisionHandler(.allow); return }
         urlMatchCompletion?(url)
         dismissAuth(animated: true)
         decisionHandler(.cancel)
     }
     
-    func webView(_ webView: WKWebView,
-                 didReceive challenge: URLAuthenticationChallenge,
-                 completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    func webView(_ view: WKWebView, didReceive challenge: Challenge, completionHandler: @escaping ChallengeCompletion) {
         guard challenge.isTrusted else { completionHandler(.performDefaultHandling, nil); return }
         let credentials = URLCredential(trust: challenge.protectionSpace.serverTrust!)
         completionHandler(.useCredential, credentials)
@@ -103,11 +86,16 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
         tuned {
             $0.title = Text.Auth.title
             $0.view.backgroundColor = .white
-            $0.navigationItem.rightBarButtonItem = cancelButton
-
-            guard let frame = cancelButton.customView?.frame else { return }
-            let destFrame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height)
-            cancelButton.customView?.frame = destFrame
+        }
+        
+        UIButton(type: .custom).tuned {
+            $0.width(64).height(44)
+            $0.titleLabel?.font = Font.barButton
+            $0.setTitleColor(.white, for: .normal)
+            $0.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+            $0.setTitle(Text.Common.cancel, for: .normal)
+            cancelButton = UIBarButtonItem(customView: $0)
+            navigationItem.rightBarButtonItem = cancelButton
         }
         
         webView.addTo(view).tuned {
