@@ -41,7 +41,7 @@ final class PhotoCell: UICollectionViewCell {
         }
         
         let bottomRoot = UIView().addTo(root).tuned {
-            $0.bottom(root).left(root).right(root).height(60)
+            $0.bottom(root).left(root).right(root).height(50)
             $0.backgroundColor = UIColor.black.withAlphaComponent(0.55)
         }
         

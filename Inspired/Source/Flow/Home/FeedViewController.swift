@@ -44,4 +44,10 @@ final class FeedViewController: ViewController {
             $0.backgroundColor = .white
         }
     }
+    
+    // MARK: GUI
+    
+    private enum GUI {
+        
+    }
 }

@@ -26,6 +26,12 @@ enum Font {
     static func basic(_ size: CGFloat) -> UIFont { return UIFont(name: "AvenirNext-Regular", size: size)! }
 }
 
+// MARK: Time
+
+enum Time {
+    static let splashDelay = 0.25
+}
+
 // MARK: Text
 
 enum Text {
@@ -40,6 +46,6 @@ enum Text {
     enum Auth {
         static let view = "Inspire Now!"
         static let auth = "Login with Unsplash"
-        static let title = auth
+        static let title = "Unsplash"
     }
 }

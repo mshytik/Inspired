@@ -145,8 +145,8 @@
 		F9B1D62B2109414B006FAD5A /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				F9B1D62E2109424F006FAD5A /* Component */,
 				F9B1D62C21094165006FAD5A /* DetailsViewController.swift */,
+				F9B1D62E2109424F006FAD5A /* Component */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -314,8 +314,8 @@
 		F9D4160E210350920051D73F /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				F9D4161721036E850051D73F /* Component */,
 				F9D416152103663E0051D73F /* AuthViewController.swift */,
+				F9D4161721036E850051D73F /* Component */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -323,8 +323,8 @@
 		F9D4161721036E850051D73F /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				F9D0ED412108A2900055D4CD /* AuthError.swift */,
 				F9D4161821036EBB0051D73F /* AuthManager.swift */,
+				F9D0ED412108A2900055D4CD /* AuthError.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -341,8 +341,8 @@
 		F9D4161E2103805C0051D73F /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F9D0ED3E21089F920055D4CD /* Component */,
 				F9D4161F2103805C0051D73F /* FeedViewController.swift */,
+				F9D0ED3E21089F920055D4CD /* Component */,
 			);
 			path = Home;
 			sourceTree = "<group>";

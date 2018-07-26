@@ -12,21 +12,13 @@ final class SplashViewController: ViewController {
         dispatchInitialFlow()
     }
     
-    // MARK: Logic
+    // MARK: Configuration
     
     private func dispatchInitialFlow() {
-        after(GUI.dispatchDelay) { appWindow?.rootViewController = LandingViewController() }
+        after(Time.splashDelay) { setRootScreen(LandingViewController()) }
     }
-    
-    // MARK: Configuration
     
     private func configure() {
         UIImageView(image: Image.splash).addTo(view).fillParent().configureFill()
-    }
-    
-    // MARK: GUI
-    
-    private enum GUI {
-        static let dispatchDelay = 0.25
     }
 }

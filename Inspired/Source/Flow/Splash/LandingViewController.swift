@@ -34,7 +34,7 @@ final class LandingViewController: ViewController {
     private func initialAnimation() {
         after(GUI.initialDelay) {
             UIView.animate(withDuration: GUI.darkDuration,
-                           animations: { self.coverView.toOpaque() },
+                           animations: self.coverView.toOpaque,
                            completion: { _ in self.animateTitle() })
         }
     }
@@ -43,15 +43,14 @@ final class LandingViewController: ViewController {
         titleCyPin?.constant = GUI.destinationTitleY
         UIView.animate(withDuration: GUI.titleDuration) {
             self.view.layoutIfNeeded()
-            self.fadeViews.forEach { $0.toOpaque() }
+            self.fadeViews.toOpaque()
         }
     }
     
     private func animateToHome() {
-        let animation: Animation = { self.fadeViews.forEach { $0.toClear() } }
-        UIView.animate(withDuration: GUI.outDuration, animations: animation) { _ in
+        UIView.animate(withDuration: GUI.outDuration, animations: fadeViews.toClear) { _ in
             UIView.animate(withDuration: GUI.outDuration,
-                           animations: { self.bgViews.forEach { $0.toClear() } },
+                           animations: self.bgViews.toClear,
                            completion: { _ in self.toFeed() })
         }
     }
@@ -67,38 +66,41 @@ final class LandingViewController: ViewController {
     }
     
     private func toFeed() {
-        FeedViewController().tuned {
-            let navVc = NavigationController(rootViewController: $0)
-            navVc.view.toClear()
-            appWindow?.rootViewController = navVc
-            UIView.animate(withDuration: GUI.navFadeDuration, animations: { navVc.view.toOpaque() })
+        let feedVc = FeedViewController()
+        NavigationController(rootViewController: feedVc).tuned {
+            $0.view.toClear()
+            appWindow?.rootViewController = $0
+            UIView.animate(withDuration: GUI.navFadeDuration, animations: $0.view.toOpaque)
         }
     }
     
     // MARK: Configure
     
     private func configure() {
-        fadeViews.forEach { $0.alpha = Alpha.clear }
+        fadeViews.toClear()
         
         let root = UIView().addTo(view).tuned {
-            $0.top(view).left(view).width(Screen.bounds.width).height(Screen.bounds.height)
+            $0.top(view).left(view).width(Screen.width).height(Screen.height)
         }
         
-        bgImageView.addTo(root).fillParent().configureFill()
+        bgImageView.addTo(root).tuned {
+            $0.fillParent().configureFill()
+        }
         
-        coverView.addTo(root).fillParent().tuned {
+        coverView.addTo(root).tuned {
+            $0.fillParent()
             $0.backgroundColor = Color.darkOverlay
         }
         
-        titleLabel.addTo(root).cx(root).tuned {
-            titleCyPin = $0.pinCy(root, GUI.initialTitleY)
+        titleLabel.addTo(root).tuned {
+            titleCyPin = $0.cx(root).pinCy(root, GUI.initialTitleY)
             $0.update(Font.bigTitle, .white)
             $0.text = Text.appTitle.capitalized
         }
         
         viewButton.addTo(root).tuned {
-            $0.configureBordered()
             $0.bottom(root, -GUI.buttonOffset).cx(root)
+            $0.configureBordered()
             $0.setTitle(Text.Auth.view, for: .normal)
             $0.addTarget(self, action: #selector(viewTap), for: .touchUpInside)
         }

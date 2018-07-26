@@ -42,14 +42,12 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !webView.canGoBack { webView.load(URLRequest(url: startUrl)) }
+        webView.loadIfStackEmpty(startUrl)
     }
     
     // MARK: WKNavigationDelegate
     
-    private func webView(webView: WKWebView,
-                 decidePolicyForNavigationAction action: WKNavigationAction,
-                 decisionHandler: PolicyComplete) {
+    func webView(_ view: WKWebView, decidePolicyFor action: WKNavigationAction, decisionHandler: @escaping PolicyComplete) {
         guard let url = action.request.url, url.matches(dismissUrl) else { decisionHandler(.allow); return }
         urlMatchCompletion?(url)
         dismissAuth(animated: true)

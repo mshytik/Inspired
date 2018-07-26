@@ -38,8 +38,14 @@ var appWindow: UIWindow? {
     return (UIApplication.shared.delegate)?.window!
 }
 
+func setRootScreen(_ vc: UIViewController) {
+    appWindow?.rootViewController = vc
+}
+
 enum Screen {
     static var main: UIScreen { return .main }
     static var bounds: CGRect { return main.bounds }
     static var scale: CGFloat { return main.scale }
+    static var width: CGFloat { return bounds.width }
+    static var height: CGFloat { return bounds.height }
 }

@@ -1,4 +1,5 @@
 import UIKit
+import WebKit
 
 // MARK: UIView
 
@@ -8,20 +9,18 @@ extension UIView {
         return self
     }
     
-    @discardableResult func toOpaque() -> Self {
-        alpha = Alpha.opaque
-        return self
-    }
-    
-    @discardableResult func toClear() -> Self {
-        alpha = Alpha.clear
-        return self
-    }
+    var toOpaque: Animation { return { self.alpha = Alpha.opaque } }
+    var toClear: Animation { return { self.alpha = Alpha.clear } }
     
     @discardableResult func toVisible(_ visible: Bool) -> Self {
         alpha = Alpha.isVisible(visible)
         return self
     }
+}
+
+extension Array where Element == UIView {
+    var toOpaque: Animation { return { self.forEach { $0.toOpaque() } } }
+    var toClear: Animation { return { self.forEach { $0.toClear() } } }
 }
 
 // MARK: UILabel
@@ -73,13 +72,14 @@ extension UIButton {
 
 extension UICollectionView {
     static func vertical() -> UICollectionView {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = NumConst.attached
-        layout.minimumLineSpacing = NumConst.attached
-        layout.headerReferenceSize = .zero;
-        layout.footerReferenceSize = .zero;
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
+        let layout = UICollectionViewFlowLayout().tuned {
+            $0.scrollDirection = .vertical
+            $0.minimumInteritemSpacing = NumConst.attached
+            $0.minimumLineSpacing = NumConst.attached
+            $0.headerReferenceSize = .zero
+            $0.footerReferenceSize = .zero
+            $0.sectionInset = .zero
+        }
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }
     
@@ -89,5 +89,14 @@ extension UICollectionView {
     
     func dequeue<T: UICollectionViewCell>(_ path: IndexPath) -> T {
         return dequeueReusableCell(withReuseIdentifier: String(describing: T.self), for: path) as! T
+    }
+}
+
+// MARK: WKWebView
+
+extension WKWebView {
+    func loadIfStackEmpty(_ url: URL) {
+        guard !canGoBack else { return }
+        load(URLRequest(url: url))
     }
 }
