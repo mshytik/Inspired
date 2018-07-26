@@ -31,6 +31,7 @@ enum Font {
 
 enum Text {
     static let appTitle = "Inspiration"
+    static let empty = ""
     
     enum Common {
         static let cancel = "Cancel"

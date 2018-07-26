@@ -16,22 +16,18 @@ final class Photo {
         return Screen.bounds.width * (height / width)
     }
     
-    var cellHeight: CGFloat {
-        return heightForFullWidth + 200
-    }
-    
     // MARK: Init
     
     init(json: Json) {
-        self.width = (json[Keys.width.rawValue] as? CGFloat) ?? 0
-        self.height = (json[Keys.height.rawValue] as? CGFloat) ?? 0
+        self.width = parseFloat(json, Keys.width.rawValue)
+        self.height = parseFloat(json, Keys.height.rawValue)
         
-        let user: Json = (json[Keys.user.rawValue] as? Json) ?? [:]
-        self.name = (user[Keys.name.rawValue] as? String) ?? ""
+        let user = parseJson(json, Keys.user.rawValue)
+        self.name = parseString(user, Keys.name.rawValue)
         
-        let urls: Json = (json[Keys.urls.rawValue] as? Json) ?? [:]
-        self.fullUrl = (urls[Keys.full.rawValue] as? String) ?? ""
-        self.regularUrl = (urls[Keys.regular.rawValue] as? String) ?? ""
+        let urls = parseJson(json, Keys.urls.rawValue)
+        self.fullUrl = parseString(urls, Keys.full.rawValue)
+        self.regularUrl = parseString(urls, Keys.regular.rawValue)
     }
     
     // MARK: Keys

@@ -26,6 +26,9 @@ private enum Rgb {
 enum NumConst {
     static let attached: CGFloat = 0
     static let same: CGFloat = 1
+    
+    static let defaultParseInt = 0
+    static let defaultParseFloat: CGFloat = 0
 }
 
 // MARK: Device

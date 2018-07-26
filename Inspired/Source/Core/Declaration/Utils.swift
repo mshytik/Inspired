@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 // MARK: Open
 
@@ -44,9 +44,25 @@ extension URL {
 }
 
 extension URLAuthenticationChallenge {
-    var isTrusted: Bool {
-        return protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust
-    }
+    var isTrusted: Bool { return protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust }
+}
+
+// MARK: Parsing
+
+func parseString(_ json: Json, _ key: String) -> String {
+    return (json[key] as? String) ?? Text.empty
+}
+
+func parseInt(_ json: Json, _ key: String) -> Int {
+    return (json[key] as? Int) ?? NumConst.defaultParseInt
+}
+
+func parseFloat(_ json: Json, _ key: String) -> CGFloat {
+    return (json[key] as? CGFloat) ?? NumConst.defaultParseFloat
+}
+
+func parseJson(_ json: Json, _ key: String) -> Json {
+    return (json[key] as? Json) ?? [:]
 }
 
 // MARK: GCD
