@@ -18,7 +18,7 @@ final class LandingViewController: ViewController {
     }
     
     private var bgViews: [UIView] {
-        return [view, bgImageView, coverView]
+        return [bgImageView, coverView]
     }
     
     // MARK: Lifecycle
@@ -69,7 +69,7 @@ final class LandingViewController: ViewController {
         let feedVc = FeedViewController()
         NavigationController(rootViewController: feedVc).tuned {
             $0.view.toClear()
-            appWindow?.rootViewController = $0
+            setRootScreen($0)
             UIView.animate(withDuration: GUI.navFadeDuration, animations: $0.view.toOpaque)
         }
     }
@@ -77,7 +77,10 @@ final class LandingViewController: ViewController {
     // MARK: Configure
     
     private func configure() {
-        fadeViews.toClear()
+        tuned {
+            $0.fadeViews.toClear()
+            $0.view.backgroundColor = Color.feedBg
+        }
         
         let root = UIView().addTo(view).tuned {
             $0.top(view).left(view).width(Screen.width).height(Screen.height)
@@ -95,7 +98,7 @@ final class LandingViewController: ViewController {
         titleLabel.addTo(root).tuned {
             titleCyPin = $0.cx(root).pinCy(root, GUI.initialTitleY)
             $0.update(Font.bigTitle, .white)
-            $0.text = Text.appTitle.capitalized
+            $0.text = Text.appTitle.lowercased()
         }
         
         viewButton.addTo(root).tuned {
@@ -119,7 +122,7 @@ final class LandingViewController: ViewController {
         static let initialDelay: TimeInterval = 0.3
         static let darkDuration: TimeInterval = 0.55
         static let titleDuration: TimeInterval = 0.5
-        static let outDuration: TimeInterval = 0.8
+        static let outDuration: TimeInterval = 0.45
         static let navFadeDuration: TimeInterval = 0.35
         
         static let initialTitleY: CGFloat = -60

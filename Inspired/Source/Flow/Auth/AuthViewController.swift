@@ -8,8 +8,9 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     // MARK: Types
     
     typealias UrlCompletion = (URL) -> Void
+    typealias NavAction = WKNavigationAction
     typealias Challenge = URLAuthenticationChallenge
-    typealias ChallengeCompletion = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    typealias ChallengeComplete = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
     
     // MARK: Properties
     
@@ -20,7 +21,6 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     var urlMatchCompletion: UrlCompletion?
     
     private let webView = WKWebView()
-    private var cancelButton: UIBarButtonItem?
     
     // MARK: Init
     
@@ -47,14 +47,14 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     
     // MARK: WKNavigationDelegate
     
-    func webView(_ view: WKWebView, decidePolicyFor action: WKNavigationAction, decisionHandler: @escaping PolicyComplete) {
+    func webView(_ view: WKWebView, decidePolicyFor action: NavAction, decisionHandler: @escaping PolicyComplete) {
         guard let url = action.request.url, url.matches(dismissUrl) else { decisionHandler(.allow); return }
         urlMatchCompletion?(url)
         dismissAuth(animated: true)
         decisionHandler(.cancel)
     }
     
-    func webView(_ view: WKWebView, didReceive challenge: Challenge, completionHandler: @escaping ChallengeCompletion) {
+    func webView(_ view: WKWebView, didReceive challenge: Challenge, completionHandler: @escaping ChallengeComplete) {
         guard challenge.isTrusted else { completionHandler(.performDefaultHandling, nil); return }
         let credentials = URLCredential(trust: challenge.protectionSpace.serverTrust!)
         completionHandler(.useCredential, credentials)
@@ -62,7 +62,7 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
     
     // MARK: Navigation
     
-    @objc func cancel() {
+    @objc override func cancel() {
         dismissAuth(didCancel: true, animated: true)
     }
     
@@ -84,16 +84,7 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
         tuned {
             $0.title = Text.Auth.title
             $0.view.backgroundColor = .white
-        }
-        
-        UIButton(type: .custom).tuned {
-            $0.width(64).height(44)
-            $0.titleLabel?.font = Font.barButton
-            $0.setTitleColor(.white, for: .normal)
-            $0.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-            $0.setTitle(Text.Common.cancel, for: .normal)
-            cancelButton = UIBarButtonItem(customView: $0)
-            navigationItem.rightBarButtonItem = cancelButton
+            $0.configureDismissButton()
         }
         
         webView.addTo(view).tuned {

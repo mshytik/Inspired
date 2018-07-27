@@ -4,7 +4,13 @@ import UIKit
 
 final class FeedCollectionAdapter: NSObject, CollectionSource {
     
+    // MARK: Definitions
+    
+    typealias PhotoSelection = (Photo) -> Void
+    
     // MARK: Properties
+    
+    var photoSelection: PhotoSelection?
     
     private let collectionView: UICollectionView
     private var photos: [Photo] = [] { didSet { collectionView.reloadData() } }
@@ -17,7 +23,7 @@ final class FeedCollectionAdapter: NSObject, CollectionSource {
         super.init()
         
         collectionView.tuned {
-            $0.register(PhotoCell.self)
+            $0.register(FeedCell.self)
             $0.dataSource = self
             $0.delegate = self
         }
@@ -36,15 +42,20 @@ final class FeedCollectionAdapter: NSObject, CollectionSource {
     }
     
     func collectionView(_ view: UICollectionView, cellForItemAt path: IndexPath) -> UICollectionViewCell {
-        let cell: PhotoCell = collectionView.dequeue(path)
+        let cell: FeedCell = collectionView.dequeue(path)
         cell.configure(photo: photos[path.row])
         return cell
     }
     
+    // MARK: UICollectionViewDelegate
+    
+    func collectionView(_ view: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        photoSelection?(photos[indexPath.row])
+    }
+    
     // MARK: UICollectionViewDelegateFlowLayout
     
-    func collectionView(_ view: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt path: IndexPath) -> CGSize {
-        let photo = photos[path.row]
-        return CGSize(width: Screen.bounds.width, height: photo.heightForFullWidth)
+    func collectionView(_ view: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt idx: IndexPath) -> CGSize {
+        return CGSize(width: Screen.bounds.width, height: photos[idx.row].heightForFullWidth + 52)
     }
 }

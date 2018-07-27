@@ -17,6 +17,6 @@ final class Window: UIWindow {
     }
     
     private func commonInit() {
-        translatesAutoresizingMaskIntoConstraints = false
+//        translatesAutoresizingMaskIntoConstraints = false
     }
 }

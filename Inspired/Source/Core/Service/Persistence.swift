@@ -1,13 +1,13 @@
 import Foundation
 import CoreData
 
-// MARK: DataService
+// MARK: Persistence
 
-final class DataService {
+final class Persistence {
     
     // MARK: Static
     
-    static let shared = DataService(containerName: PathConfig.coreDataModelName)
+    static let shared = Persistence(containerName: PathConfig.coreDataModelName)
     
     // MARK: Properties
     
@@ -16,7 +16,7 @@ final class DataService {
     // MARK: Init
     
     init(containerName: String) {
-        self.persistentContainer = DataService.container(name: containerName)
+        self.persistentContainer = Persistence.container(name: containerName)
     }
     
     func writeToDisk() {

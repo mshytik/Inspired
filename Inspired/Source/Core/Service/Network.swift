@@ -1,8 +1,8 @@
 import Foundation
 
-// MARK: NetworkService
+// MARK: Network
 
-final class NetworkService {
+final class Network {
     
     // MARK: Types
     
@@ -57,6 +57,7 @@ final class NetworkService {
                 return
             }
             
+            print(obj)
             if let json = obj as? Json {
                 callback(.success(value: .single(json: json)))
             } else if let jsons = obj as? [Json] {

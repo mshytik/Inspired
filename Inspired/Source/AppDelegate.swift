@@ -14,7 +14,7 @@ import UIKit
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        DataService.shared.writeToDisk()
+        Persistence.shared.writeToDisk()
     }
     
     // MARK: Configuration
@@ -26,8 +26,8 @@ import UIKit
     
     private func configureWindow() {
         window = Window(frame: Screen.bounds).tuned {
-            $0.width(Screen.bounds.width).height(Screen.bounds.height)
-            $0.backgroundColor = .white
+            $0.width(Screen.width).height(Screen.height)
+            $0.backgroundColor = Color.feedBg
             $0.rootViewController = SplashViewController()
             $0.makeKeyAndVisible()
         }

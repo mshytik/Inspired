@@ -26,7 +26,9 @@ extension Array where Element == UIView {
 // MARK: UILabel
 
 extension UILabel {
-    @discardableResult func update(_ font: UIFont, _ color: UIColor, _ alignment: NSTextAlignment = .left) -> Self {
+    @discardableResult func update(_ font: UIFont,
+                                   _ color: UIColor,
+                                   _ alignment: NSTextAlignment = .left) -> Self {
         self.font = font
         self.textColor = color
         self.textAlignment = alignment
@@ -58,11 +60,21 @@ extension UIButton {
         return self
     }
     
+    @discardableResult func configureBarItem() -> Self {
+        width(GUI.barWidth).height(GUI.barHeight)
+        titleLabel?.font = Font.barButton
+        setTitleColor(.white, for: .normal)
+        return self
+    }
+    
     private enum GUI {
         static let width: CGFloat = 300
         static let height: CGFloat = 50
         static let corner: CGFloat = height / 2
         static let border: CGFloat = 2
+        
+        static let barWidth: CGFloat = 64
+        static let barHeight: CGFloat = 44
         
         static let color = UIColor.white
     }
@@ -89,6 +101,16 @@ extension UICollectionView {
     
     func dequeue<T: UICollectionViewCell>(_ path: IndexPath) -> T {
         return dequeueReusableCell(withReuseIdentifier: String(describing: T.self), for: path) as! T
+    }
+}
+
+// MARK: UIViewController
+
+extension UIViewController {
+    func presentInNavStack(_ vc: UIViewController) {
+        let navVc = NavigationController(rootViewController: vc)
+        navVc.modalPresentationStyle = .overFullScreen
+        present(navVc, animated: true, completion: nil)
     }
 }
 

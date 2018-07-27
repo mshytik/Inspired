@@ -3,7 +3,7 @@ import Nuke
 
 // MARK: PhotoCell
 
-final class PhotoCell: UICollectionViewCell {
+final class FeedCell: UICollectionViewCell {
     
     // MARK: Properties
     
@@ -26,13 +26,13 @@ final class PhotoCell: UICollectionViewCell {
     private func commonInit() {
         contentView.clipsToBounds = true
         
-        photoImageView.addTo(contentView).tuned {
-            $0.fillParent().configureFill()
-        }
-        
         let root = UIView().addTo(contentView).tuned {
             $0.left(contentView).top(contentView).width(Screen.bounds.width)
             heightPin = $0.pinHeight(GUI.defaultRootHeight)
+        }
+        
+        photoImageView.addTo(root).tuned {
+            $0.fillParent().configureFill()
         }
         
         UIView().addTo(root).tuned {
@@ -40,23 +40,31 @@ final class PhotoCell: UICollectionViewCell {
             $0.backgroundColor = .black
         }
         
-        let bottomRoot = UIView().addTo(root).tuned {
-            $0.bottom(root).left(root).right(root).height(50)
-            $0.backgroundColor = UIColor.black.withAlphaComponent(0.55)
+        let bottomRoot = UIView().addTo(contentView).tuned {
+            $0.under(root).left(root).right(root).height(52)
+            $0.backgroundColor = Color.navBg
         }
         
         titleLabel.addTo(bottomRoot).tuned {
             $0.left(bottomRoot, 16).cy(bottomRoot).update(Font.photoAuthor, .white)
+            $0.numberOfLines = 0
+            $0.lineBreakMode = .byWordWrapping
         }
         
         let loadButton = UIButton(type: .custom).addTo(bottomRoot).tuned {
-            $0.cy(titleLabel).right(bottomRoot, -16).width(30).height(30)
+            $0.cy(titleLabel).right(bottomRoot, -16).width(25).height(25)
             $0.setImage(Image.downloadPhoto.withRenderingMode(.alwaysTemplate), for: .normal)
             $0.tintColor = UIColor.white.withAlphaComponent(0.65)
         }
         
+        let chartImage = UIImageView().addTo(bottomRoot).tuned {
+            $0.cy(titleLabel, -1).before(loadButton, -24).width(25).height(25)
+            $0.image = Image.chart.withRenderingMode(.alwaysTemplate)
+            $0.tintColor = UIColor.white.withAlphaComponent(0.65)
+        }
+        
         UIImageView().addTo(bottomRoot).tuned {
-            $0.cy(titleLabel, -2).before(loadButton, -24).width(30).height(30)
+            $0.cy(titleLabel, -2).before(chartImage, -24).width(25).height(25)
             $0.image = Image.like.withRenderingMode(.alwaysTemplate)
             $0.tintColor = UIColor.white.withAlphaComponent(0.65)
         }
@@ -72,9 +80,9 @@ final class PhotoCell: UICollectionViewCell {
     // MARK: Configuration
     
     func configure(photo: Photo) {
-        titleLabel.text = photo.name
+        titleLabel.text = "by " + photo.name + "\non " + Format.prettyPublishDate(photo.date)
         heightPin?.constant = photo.heightForFullWidth
-        configure(imageUrlString: photo.regularUrl)
+        configure(imageUrlString: photo.smallUrl)
     }
     
     private func configure(imageUrlString: String) {

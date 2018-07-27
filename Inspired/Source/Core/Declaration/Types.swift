@@ -9,6 +9,20 @@ typealias Args = [UIApplicationLaunchOptionsKey: Any]
 enum Result<Value> {
     case success(value: Value)
     case failure(error: Error)
+    
+    var value: Value? {
+        switch self {
+        case .success(let value): return value
+        case .failure: return nil
+        }
+    }
+    
+    var error: Error? {
+        switch self {
+        case .success: return nil
+        case .failure(let error): return error
+        }
+    }
 }
 
 // MARK: Ui

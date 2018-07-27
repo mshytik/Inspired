@@ -12,7 +12,7 @@ final class PhotosProvider {
     
     static func fetchPhotos(completion: @escaping PhotosCompletion) {
         guard let url = URL(string: PathConfig.photos) else { return }
-        NetworkService.request(url, .get) { result in
+        Network.request(url, .get) { result in
             mainThread {
                 switch result {
                 case .success(let response): completion(.success(value: photos(with: response)))
@@ -24,7 +24,7 @@ final class PhotosProvider {
     
     // MARK: Helper
     
-    private static func photos(with response: NetworkService.JsonResponse) -> [Photo] {
+    private static func photos(with response: Network.JsonResponse) -> [Photo] {
         switch response {
         case .single(let json): return [Photo(json: json)]
         case .array(let jsons): return jsons.map { Photo(json: $0) }

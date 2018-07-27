@@ -114,7 +114,7 @@ final class AuthManager {
             return
         }
         
-        NetworkService.request(tokenUrl, .post) {
+        Network.request(tokenUrl, .post) {
             switch $0 {
             case .success(let json): print(json)
             case .failure(let error): completion(nil, error as NSError)
