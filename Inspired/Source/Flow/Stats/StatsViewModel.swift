@@ -18,7 +18,9 @@ final class StatsViewModel: IAxisValueFormatter {
     // MARK: Interface
     
     var composedTitle: String {
-        return stat.name.capitalized + Char.means + String(stat.totalValue)
+        let total = Text.Details.total + Char.space + stat.name.capitalized + Char.means + String(stat.totalValue)
+        let period = Text.Details.lastMonth + Char.means + String(stat.periodValue)
+        return total + Char.eol + period
     }
     
     var chartItems: [BarChartDataEntry] {

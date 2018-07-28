@@ -32,6 +32,8 @@ typealias CollectionSource = UICollectionViewDataSource & UICollectionViewDelega
 
 // MARK: Closure
 
+typealias ResultCompletion<ResultType> = (Result<ResultType>) -> Void
+
 typealias Execution = () -> ()
 typealias Animation = Execution
 typealias OnComplete = (Bool) -> Void

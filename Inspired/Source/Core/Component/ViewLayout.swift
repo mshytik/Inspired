@@ -19,10 +19,10 @@ extension UIView {
     @discardableResult func pinBottom(_ to: UIView, _ d: CGFloat = zr) -> Pin? { return pin(.bottom, to, .bottom, d) }
     
     @discardableResult func left(_ to: UIView, _ d: CGFloat = zr) -> Self { pinLeft(to, d); return self }
-    @discardableResult func pinLeft(_ to: UIView, _ d: CGFloat = zr) -> Pin? { return pin(.left, to, .left, d) }
+    @discardableResult func pinLeft(_ to: UIView, _ d: CGFloat = zr) -> Pin? { return pin(.leading, to, .leading, d) }
     
     @discardableResult func right(_ to: UIView, _ d: CGFloat = zr) -> Self { pinRight(to, d); return self }
-    @discardableResult func pinRight(_ to: UIView, _ d: CGFloat = zr) -> Pin? { return pin(.right, to, .right, d) }
+    @discardableResult func pinRight(_ to: UIView, _ d: CGFloat = zr) -> Pin? { return pin(.trailing, to, .trailing, d) }
     
     @discardableResult func above(_ to: UIView, _ d: CGFloat = zr) -> Self { pinAbove(to, d); return self }
     @discardableResult func pinAbove(_ to: UIView, _ d: CGFloat = zr) -> Pin? { return pin(.bottom, to, .top, d) }
@@ -48,9 +48,12 @@ extension UIView {
     @discardableResult func width(_ value: CGFloat) -> Self { pinWidth(value); return self }
     @discardableResult func pinWidth(_ value: CGFloat) -> Pin? { return pin(.width, nil, nil, value) }
     
+    @discardableResult func height(to: UIView) -> Self { pin(.height, to, .height, zr); return self }
+    
     @discardableResult func fillParent() -> Self { superview.open { top($0).bottom($0).left($0).right($0) }; return self }
     @discardableResult func cxy(_ toView: UIView) -> Self { return cx(toView).cy(toView) }
     @discardableResult func square(_ value: CGFloat) -> Self { return width(value).height(value) }
+    @discardableResult func sides(_ to: UIView, _ v: CGFloat = zr) -> Self { return left(to, v).right(to, -v) }
     
     // MARK: Core
     

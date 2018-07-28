@@ -4,7 +4,7 @@ import UIKit
 
 final class AuthManager {
     
-    // MARK: Type definitions
+    // MARK: Types
     
     struct AccessToken: CustomStringConvertible {
         let appId: String
@@ -12,16 +12,12 @@ final class AuthManager {
         var description: String { return accessToken }
     }
     
+    typealias Api = Path.Unsplash.Base
     typealias TokenCompletion = (AccessToken?, NSError?) -> Void
     
-    // MARK: Properties
+    // MARK: Static
     
-    static let shared = AuthManager(appId: Path.key, secret: Path.secret, scopes: ["public", "read_user"])
-    
-    var accessToken: AccessToken? {
-        guard let token = KeychainService.get(key: appId) else { return nil }
-        return AccessToken(appId: appId, accessToken: token)
-    }
+    static let shared = AuthManager(appId: Api.key, secret: Api.secret, scopes: ["public", "read_user"])
     
     private static let publicScope = ["public"]
     private static let allScopes = ["public",
@@ -32,6 +28,13 @@ final class AuthManager {
                                     "write_likes",
                                     "read_collections",
                                     "write_collections"]
+    
+    // MARK: Properties
+    
+    var accessToken: AccessToken? {
+        guard let token = Keychain.get(key: appId) else { return nil }
+        return AccessToken(appId: appId, accessToken: token)
+    }
     
     private let appId: String
     private let secret: String
@@ -78,7 +81,7 @@ final class AuthManager {
         self.scopes = scopes
     }
     
-    // MARK: Public
+    // MARK: Interface
     
     func auth(from controller: UIViewController, completion: @escaping TokenCompletion) {
         guard let url = authUrl else { completion(nil, nil); return }
@@ -99,7 +102,11 @@ final class AuthManager {
         }
     }
     
-    // MARK: Private
+    func clearAccessToken() -> Bool {
+        return Keychain.clear()
+    }
+    
+    // MARK: Implementation
     
     private func fetchToken(from url: URL, completion: @escaping TokenCompletion) {
         let (extractCode, error) = extract(url: url)
@@ -147,6 +154,4 @@ final class AuthManager {
             let desc = json?["error_description"] as? String else { return nil }
         return AuthError.error(codeString: code, description: desc)
     }
-    
-    func clearAccessToken() -> Bool { return KeychainService.clear() }
 }

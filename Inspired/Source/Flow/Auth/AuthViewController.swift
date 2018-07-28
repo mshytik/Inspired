@@ -75,7 +75,7 @@ final class AuthViewController: ViewController, WKNavigationDelegate {
         }
     }
     
-    // MARK: Configuration
+    // MARK: Configure
     
     private func configure() {
         tuned {

@@ -29,7 +29,7 @@ enum NumConst {
     static let same: CGFloat = 1
     
     static let defaultParseInt = 0
-    static let defaultParseFloat: CGFloat = 0
+    static let defaultParseFloat: CGFloat = 1
 }
 
 // MARK: Device

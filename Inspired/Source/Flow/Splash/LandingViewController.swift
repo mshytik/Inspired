@@ -86,7 +86,7 @@ final class LandingViewController: ViewController {
         
         titleLabel.addTo(root).tuned {
             titleCyPin = $0.cx(root).pinCy(root, GUI.initialTitleY)
-            $0.update(Font.bigTitle, .white)
+            $0.update(Font.bigTitle, Color.primary)
             $0.text = Text.Auth.appTitle.lowercased()
         }
         

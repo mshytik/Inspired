@@ -4,9 +4,7 @@ import Foundation
 
 struct AuthError {
     
-    // MARK: Definitions
-    
-    static let Domain = "com.unsplash.error"
+    // MARK: Types
     
     enum Code: Int {
         case unauthorizedClient = 1, denied, unsupportedResponseType, invalidScope, serverError,
@@ -14,6 +12,8 @@ struct AuthError {
     }
     
     // MARK: Static
+    
+    static let Domain = "com.unsplash.error"
     
     static func error(codeString: String, description: String?) -> NSError {
         var code : Code

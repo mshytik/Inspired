@@ -9,9 +9,8 @@ class NavigationController: UINavigationController {
     static func applyDefaultAppearance() {
         UINavigationBar.appearance().tuned {
             $0.tintColor = .white
-            $0.barStyle = .black
-            $0.isTranslucent = false
-            $0.barTintColor = Color.Bg.navBar
+            $0.shadowImage = UIImage()
+            $0.setBackgroundImage(UIImage.make(color: Color.Bg.navBar), for: .default)
             $0.titleTextAttributes = [.foregroundColor: UIColor.white, .font: Font.navTitle]
         }
     }
@@ -24,7 +23,14 @@ class NavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
+    }
+    
+    // MARK: Configure
+    
+    private func configure() {
         view.backgroundColor = Color.Bg.screen
+        navigationBar.barTintColor = Color.Bg.navBar
     }
 }
 

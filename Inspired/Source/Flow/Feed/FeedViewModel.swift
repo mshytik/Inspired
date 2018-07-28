@@ -35,11 +35,7 @@ final class FeedViewModel: NSObject, CollectionSource {
     // MARK: Configure
     
     func configureCollection(_ view: UICollectionView) {
-        view.tuned {
-            $0.register(FeedCell.self)
-            $0.dataSource = self
-            $0.delegate = self
-        }
+        view.register(FeedCell.self).configureSource(self)
     }
     
     // MARK: UICollectionViewDataSource

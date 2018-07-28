@@ -15,9 +15,11 @@ class ViewController: UIViewController {
         configure()
     }
     
-    // MARK: Configuration
+    // MARK: Interface
     
     func configureDismissButton() {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         UIButton(type: .custom).tuned {
             $0.configureBarItem()
             $0.setTitle(Text.Common.cancel, for: .normal)
@@ -26,11 +28,11 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: Implementation
+    
     private func configure() {
         view.backgroundColor = Color.Bg.screen
     }
-    
-    // MARK: Navigation
     
     @objc func cancel() {
         dismiss(animated: true)

@@ -1,9 +1,9 @@
 import Foundation
 import Security
 
-// MARK: KeychainService
+// MARK: Keychain
 
-final class KeychainService {
+final class Keychain {
     
     // MARK: Interface
     

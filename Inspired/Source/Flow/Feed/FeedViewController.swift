@@ -17,26 +17,21 @@ final class FeedViewController: ViewController {
         viewModel.fetchPhotos()
     }
     
-    // MARK: Navigation
+    // MARK: Implementation
     
     private func toStats(photo: Photo) {
-        DetailsViewController().tuned { [weak self] vc in
-            vc.view.frame = Screen.bounds
-            after(0.35) { self?.presentInNavStack(vc) }
+        DetailsViewController(photoId: photo.id).tuned { [weak self] vc in
+            _ = vc.view.frame
+            after(GUI.statsPresentDelay) { self?.presentInNavStack(vc) }
         }
     }
     
-    // MARK: Configuration
+    // MARK: Configure
     
     private func configure() {
-        tuned {
-            $0.title = Text.Common.guestName
-            $0.view.backgroundColor = Color.Bg.screen
-        }
+        title = Text.Common.guestName
         
-        collectionView.addTo(view).tuned {
-            $0.top(view).left(view).width(Screen.width).height(Screen.height)
-        }
+        collectionView.addTo(view).top(view).left(view).height(Screen.height).width(Screen.width).right(view)
         
         viewModel.tuned {
             $0.configureCollection(collectionView)
@@ -45,5 +40,9 @@ final class FeedViewController: ViewController {
         }
     }
     
-    // MARK:
+    // MARK: GUI
+    
+    private enum GUI {
+        static let statsPresentDelay: TimeInterval = 0.35
+    }
 }

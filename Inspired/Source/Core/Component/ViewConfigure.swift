@@ -12,6 +12,16 @@ extension UIColor {
 // MARK: UIImage
 
 extension UIImage {
+    static func make(color: UIColor) -> UIImage? {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let output = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return output
+    }
+    
     var template: UIImage {
         return withRenderingMode(.alwaysTemplate)
     }
@@ -98,7 +108,7 @@ extension UIButton {
         static let barWidth: CGFloat = 64
         static let barHeight: CGFloat = 44
         
-        static let color = UIColor.white
+        static let color = Color.primary
     }
 }
 
@@ -120,12 +130,19 @@ extension UICollectionView {
         }
     }
     
-    func register<T: UICollectionViewCell>(_ type: T.Type) {
+    @discardableResult func register<T: UICollectionViewCell>(_ type: T.Type) -> Self {
         register(T.self, forCellWithReuseIdentifier: String(describing: type))
+        return self
     }
     
     func dequeue<T: UICollectionViewCell>(_ path: IndexPath) -> T {
         return dequeueReusableCell(withReuseIdentifier: String(describing: T.self), for: path) as! T
+    }
+    
+    @discardableResult func configureSource(_ source: CollectionSource) -> Self {
+        dataSource = source
+        delegate = source
+        return self
     }
 }
 
@@ -135,7 +152,7 @@ extension UIViewController {
     func presentInNavStack(_ vc: UIViewController) {
         let navVc = NavigationController(rootViewController: vc)
         navVc.modalPresentationStyle = .overFullScreen
-        present(navVc, animated: true, completion: nil)
+        present(navVc, animated: true)
     }
 }
 

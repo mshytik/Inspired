@@ -46,7 +46,7 @@ final class FeedCell: UICollectionViewCell {
         titleLabel.addTo(bottomRoot).tuned {
             $0.left(bottomRoot, Layout.margin).cy(bottomRoot)
             $0.configureMultiline()
-            $0.update(Font.photoAuthor, .white)
+            $0.update(Font.photoAuthor, Color.primary)
         }
         
         let loadButton = UIButton(type: .custom).addTo(bottomRoot).tuned {
@@ -101,7 +101,7 @@ final class FeedCell: UICollectionViewCell {
         static let iconDx: CGFloat = -24
         static let chartDy: CGFloat = -1
         static let likeDy: CGFloat = -2
-        static let iconColor = UIColor.white.withAlphaComponent(0.65)
+        static let iconColor = Color.primary.withAlphaComponent(0.75)
         
         static var imageOptions: ImageLoadingOptions {
             return ImageLoadingOptions(transition: ImageLoadingOptions.Transition.fadeIn(duration: 0.3))

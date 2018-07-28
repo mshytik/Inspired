@@ -9,40 +9,58 @@ final class StatsView: UIView {
     
     typealias ViewModel = StatsViewModel
     
+    // MARK: Static
+    
+    static var viewHeight: CGFloat { return GUI.Height.total }
+    
     // MARK: Properties
     
-    private let viewModel: ViewModel
+    private var viewModel: ViewModel?
     private let chartView = BarChartView()
     private let titleLabel = UILabel()
     
     // MARK: Init
     
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configure()
     }
     
-    required init?(coder aDecoder: NSCoder) { fatalError(Text.Common.initNA) }
-    
-    // MARK: Render
-    
-    func updateUi() {
-        titleLabel.text = viewModel.composedTitle
-        configureChart()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        configure()
     }
     
-    private func configureChart() {
+    // MARK: Interface
+    
+    func configure(viewModel: ViewModel?) {
+        self.viewModel = viewModel
+        chartView.xAxis.valueFormatter = viewModel
+        guard let viewModel = viewModel else { configureEmpty(); return }
+        configure(viewModel: viewModel)
+    }
+    
+    // MARK: Implementation
+    
+    private func configure(viewModel: ViewModel) {
+        titleLabel.text = viewModel.composedTitle
+        configureChart(viewModel)
+    }
+    
+    private func configureChart(_ viewModel: ViewModel) {
+        defer {
+            chartView.tuned {
+                $0.data?.notifyDataChanged()
+                $0.notifyDataSetChanged()
+            }
+        }
+        
         guard let set = chartView.data?.dataSets.first as? BarChartDataSet else {
             updateItems(viewModel.chartItems)
             return
         }
         
-        chartView.tuned {
-            set.values = viewModel.chartItems
-            $0.data?.notifyDataChanged()
-            $0.notifyDataSetChanged()
-        }
+        set.values = viewModel.chartItems
     }
     
     private func updateItems(_ items: [BarChartDataEntry]) {
@@ -51,9 +69,14 @@ final class StatsView: UIView {
             $0.form = .none
             $0.drawIconsEnabled = false
             $0.drawValuesEnabled = false
-            $0.highlightEnabled = false
+            $0.highlightEnabled = true
+            $0.highlightColor = Color.Chart.highlight
             chartView.data = BarChartData(dataSet: $0).tuned { $0.barWidth = GUI.Chart.barWidth }
         }
+    }
+    
+    private func configureEmpty() {
+        
     }
     
     // MARK: Configuration
@@ -62,7 +85,7 @@ final class StatsView: UIView {
         width(Screen.width).height(GUI.Height.total)
         
         chartView.addTo(self).tuned {
-            $0.top(self, Layout.margin).left(self).height(GUI.Height.chart).width(Screen.width)
+            $0.top(self, Layout.margin).sides(self, GUI.Chart.margin).height(GUI.Height.chart)
             
             $0.chartDescription = Description().tuned { $0.text = Char.empty }
             $0.borderColor = Color.Chart.border
@@ -72,6 +95,17 @@ final class StatsView: UIView {
             $0.doubleTapToZoomEnabled = false
             $0.rightAxis.enabled = false
             $0.setScaleEnabled(false)
+        }
+        
+        let title = UIView().addTo(self).tuned {
+            $0.bottom(self).sides(self).height(GUI.Height.label)
+            $0.backgroundColor = Color.Bg.navBar
+        }
+        
+        titleLabel.addTo(title).tuned {
+            $0.left(title, Layout.margin).cy(title)
+            $0.configureMultiline()
+            $0.update(Font.statBar, Color.primary)
         }
         
         chartView.xAxis.tuned {
@@ -99,9 +133,10 @@ final class StatsView: UIView {
             
             $0.spaceTop = GUI.Chart.spaceTop
             $0.axisMinimum = GUI.Chart.axisMinimum
+            $0.granularity = GUI.Chart.xGranularity
         }
         
-        updateUi()
+        configureEmpty()
     }
     
     // MARK: GUI
@@ -109,7 +144,8 @@ final class StatsView: UIView {
     private enum GUI {
         enum Height {
             static let chart: CGFloat = 294
-            static let label: CGFloat = 44
+            static let label: CGFloat = 52
+            static let titleOffset: CGFloat = -24
             static let total = chart + label
         }
         
@@ -118,12 +154,7 @@ final class StatsView: UIView {
             static let axisMinimum: Double = 0
             static let barWidth: Double = 0.8
             static let spaceTop: CGFloat = 0.15
+            static let margin: CGFloat = 12
         }
-    }
-    
-    // MARK: Temp
-    
-    static var defaultViewModel: ViewModel {
-        return ViewModel(stat: testStat())
     }
 }

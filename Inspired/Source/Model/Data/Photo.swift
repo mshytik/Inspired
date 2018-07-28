@@ -6,6 +6,7 @@ final class Photo {
     
     // MARK: Properties
     
+    let id: String
     let name: String
     let desc: String
     let date: String
@@ -18,6 +19,7 @@ final class Photo {
     // MARK: Init
     
     init(json: Json) {
+        self.id = parseString(json, Keys.id.rawValue)
         self.width = parseFloat(json, Keys.width.rawValue)
         self.height = parseFloat(json, Keys.height.rawValue)
         self.desc = parseString(json, Keys.description.rawValue)
@@ -35,6 +37,6 @@ final class Photo {
     // MARK: Keys
     
     enum Keys: String {
-        case user, name, date = "created_at", description, width, height, urls, full, regular, small
+        case id, user, name, date = "created_at", description, width, height, urls, full, regular, small
     }
 }

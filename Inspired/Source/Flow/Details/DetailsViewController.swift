@@ -6,20 +6,31 @@ final class DetailsViewController: ViewController {
     
     // MARK: Properties
     
-    private let statsView = StatsView(viewModel: StatsView.defaultViewModel)
+    private let collectionView = UICollectionView.vertical()
+    private let viewModel: DetailsViewModel
+    
+    // MARK: Init
+    
+    init(photoId: String) {
+        self.viewModel = DetailsViewModel(id: photoId)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) { fatalError(Text.Common.initNA) }
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        dispatchInAnimation()
+        viewModel.fetch()
     }
     
     // MARK: Animation
     
-    private func dispatchInAnimation() {
-        after(GUI.inDelay) { UIView.animate(withDuration: GUI.inDuration, animations: self.statsView.toOpaque) }
+    private func inAnimation() {
+        collectionView.reloadData()
+        UIView.animate(withDuration: GUI.inDuration, animations: collectionView.toOpaque)
     }
     
     // MARK: Configuration
@@ -27,13 +38,14 @@ final class DetailsViewController: ViewController {
     private func configure() {
         tuned {
             $0.title = Text.Details.title
-            $0.view.backgroundColor = Color.Bg.screen
             $0.configureDismissButton()
         }
         
-        statsView.addTo(view).tuned {
-            $0.top(view).left(view).toClear()
-            $0.updateUi()
+        collectionView.addTo(view).top(view).left(view).height(Screen.height).width(Screen.width).toClear()
+        
+        viewModel.tuned {
+            $0.configureCollection(collectionView)
+            $0.fetchCompletion = { [weak self] _ in self?.inAnimation() }
         }
     }
     
