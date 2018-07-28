@@ -1,7 +1,7 @@
 import UIKit
 import Charts
 
-// MARK: DetailsStatsView
+// MARK: StatsView
 
 final class StatsView: UIView {
     
@@ -152,7 +152,7 @@ final class StatsView: UIView {
         enum Chart {
             static let xGranularity: Double = 1
             static let axisMinimum: Double = 0
-            static let barWidth: Double = 0.8
+            static let barWidth: Double = 0.9
             static let spaceTop: CGFloat = 0.15
             static let margin: CGFloat = 12
         }

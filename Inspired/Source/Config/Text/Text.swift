@@ -27,7 +27,7 @@ enum Text {
     
     enum Feed {
         static let authorPrefix = "author:" + Char.space
-        static let datePrefix = "   date:" + Char.space
+        static let datePrefix = "date:" + Char.space
     }
     
     enum Details {

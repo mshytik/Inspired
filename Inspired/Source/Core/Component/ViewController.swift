@@ -22,9 +22,9 @@ class ViewController: UIViewController {
         
         UIButton(type: .custom).tuned {
             $0.configureBarItem()
-            $0.setTitle(Text.Common.cancel, for: .normal)
+            $0.setImage(Image.close.template, for: .normal)
             $0.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: $0)
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: $0)
         }
     }
     

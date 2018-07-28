@@ -95,7 +95,8 @@ extension UIButton {
     @discardableResult func configureBarItem() -> Self {
         width(GUI.barWidth).height(GUI.barHeight)
         titleLabel?.font = Font.barButton
-        setTitleColor(.white, for: .normal)
+        tintColor = .white
+        imageView?.contentMode = .scaleAspectFit
         return self
     }
     
@@ -105,8 +106,8 @@ extension UIButton {
         static let corner: CGFloat = height / 2
         static let border: CGFloat = 2
         
-        static let barWidth: CGFloat = 64
-        static let barHeight: CGFloat = 44
+        static let barWidth: CGFloat = 24
+        static let barHeight: CGFloat = 40
         
         static let color = Color.primary
     }

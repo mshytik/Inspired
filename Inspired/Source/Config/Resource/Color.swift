@@ -20,12 +20,11 @@ enum Color {
     // MARK: Chart
     
     enum Chart {
+        static let highlight = rgb(9, 135, 95)
         static let tint = rgb(215, 254, 252)
         static let value = tint
         static let label = tint.alpha(0.8)
         static let border = tint.alpha(0.4)
         static let grid = tint.alpha(0.3)
-        
-        static let highlight = rgb(57, 224, 93)
     }
 }
