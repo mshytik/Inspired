@@ -7,7 +7,7 @@ final class Persistence {
     
     // MARK: Static
     
-    static let shared = Persistence(containerName: PathConfig.coreDataModelName)
+    static let shared = Persistence(containerName: Path.coreDataModelName)
     
     // MARK: Properties
     

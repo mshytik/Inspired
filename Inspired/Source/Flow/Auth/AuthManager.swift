@@ -16,7 +16,7 @@ final class AuthManager {
     
     // MARK: Properties
     
-    static let shared = AuthManager(appId: PathConfig.key, secret: PathConfig.secret, scopes: ["public", "read_user"])
+    static let shared = AuthManager(appId: Path.key, secret: Path.secret, scopes: ["public", "read_user"])
     
     var accessToken: AccessToken? {
         guard let token = KeychainService.get(key: appId) else { return nil }
@@ -61,7 +61,7 @@ final class AuthManager {
             $0.host = "unsplash.com"
             $0.path = "/oauth/token"
             $0.queryItems = [URLQueryItem(name: "grant_type", value: "authorization_code"),
-                             URLQueryItem(name: "client_id", value: self.appId),
+                             URLQueryItem(name: "client_id", value: appId),
                              URLQueryItem(name: "client_secret", value: secret),
                              URLQueryItem(name: "redirect_uri", value: "urn:ietf:wg:oauth:2.0:oob"),
                              URLQueryItem(name: "code", value: code)]

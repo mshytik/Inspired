@@ -1,6 +1,22 @@
 import UIKit
 import WebKit
 
+// MARK: UIColor
+
+extension UIColor {
+    func alpha(_ value: CGFloat) -> UIColor {
+        return withAlphaComponent(value)
+    }
+}
+
+// MARK: UIImage
+
+extension UIImage {
+    var template: UIImage {
+        return withRenderingMode(.alwaysTemplate)
+    }
+}
+
 // MARK: UIView
 
 extension UIView {
@@ -32,6 +48,12 @@ extension UILabel {
         self.font = font
         self.textColor = color
         self.textAlignment = alignment
+        return self
+    }
+    
+    @discardableResult func configureMultiline() -> Self {
+        numberOfLines = 0
+        lineBreakMode = .byWordWrapping
         return self
     }
 }
@@ -92,7 +114,10 @@ extension UICollectionView {
             $0.footerReferenceSize = .zero
             $0.sectionInset = .zero
         }
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        return UICollectionView(frame: .zero, collectionViewLayout: layout).tuned {
+            $0.backgroundColor = .clear
+        }
     }
     
     func register<T: UICollectionViewCell>(_ type: T.Type) {

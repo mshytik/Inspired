@@ -10,6 +10,15 @@ extension Optional {
     }
 }
 
+// MARK: Array
+
+extension Array {
+    subscript(safe index: Index) -> Element? {
+        guard indices.contains(index) else { return nil }
+        return self[index]
+    }
+}
+
 // MARK: Tuned
 
 protocol Tuned { }
@@ -54,7 +63,7 @@ extension URLAuthenticationChallenge {
 // MARK: Parsing
 
 func parseString(_ json: Json, _ key: String) -> String {
-    return (json[key] as? String) ?? Text.empty
+    return (json[key] as? String) ?? Char.empty
 }
 
 func parseInt(_ json: Json, _ key: String) -> Int {

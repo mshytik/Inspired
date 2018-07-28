@@ -7,27 +7,14 @@ final class FeedViewController: ViewController {
     // MARK: Properties
     
     private let collectionView = UICollectionView.vertical()
-    private var adapter: FeedCollectionAdapter?
+    private let viewModel = FeedViewModel()
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        fetchPhotos()
-    }
-    
-    // MARK: Logic
-    
-    private func fetchPhotos() {
-        PhotosProvider.fetchPhotos { [weak self] in
-            $0.value.open { self?.adapter?.configure(photos: $0) }
-            $0.error.open { self?.handleError($0) }
-        }
-    }
-    
-    private func handleError(_ error: Error) {
-        
+        viewModel.fetchPhotos()
     }
     
     // MARK: Navigation
@@ -43,15 +30,20 @@ final class FeedViewController: ViewController {
     
     private func configure() {
         tuned {
-            $0.title = "Guest"
-            $0.view.backgroundColor = Color.feedBg
+            $0.title = Text.Common.guestName
+            $0.view.backgroundColor = Color.Bg.screen
         }
         
         collectionView.addTo(view).tuned {
             $0.top(view).left(view).width(Screen.width).height(Screen.height)
-            $0.backgroundColor = .clear
-            adapter = FeedCollectionAdapter(collectionView: $0)
-            adapter?.photoSelection = { [weak self] in self?.toStats(photo: $0) }
+        }
+        
+        viewModel.tuned {
+            $0.configureCollection(collectionView)
+            $0.photoSelection = { [weak self] in self?.toStats(photo: $0) }
+            $0.photosCompletion = { [weak self] _ in self?.collectionView.reloadData() }
         }
     }
+    
+    // MARK:
 }

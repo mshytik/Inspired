@@ -33,7 +33,7 @@ final class LandingViewController: ViewController {
     
     private func initialAnimation() {
         after(GUI.initialDelay) {
-            UIView.animate(withDuration: GUI.darkDuration,
+            UIView.animate(withDuration: GUI.inDuration,
                            animations: self.coverView.toOpaque,
                            completion: { _ in self.animateTitle() })
         }
@@ -66,39 +66,28 @@ final class LandingViewController: ViewController {
     }
     
     private func toFeed() {
-        let feedVc = FeedViewController()
-        NavigationController(rootViewController: feedVc).tuned {
+        NavigationController(rootViewController: FeedViewController()).tuned {
             $0.view.toClear()
             setRootScreen($0)
-            UIView.animate(withDuration: GUI.navFadeDuration, animations: $0.view.toOpaque)
+            UIView.animate(withDuration: GUI.transitionDuration, animations: $0.view.toOpaque)
         }
     }
     
     // MARK: Configure
     
     private func configure() {
-        tuned {
-            $0.fadeViews.toClear()
-            $0.view.backgroundColor = Color.feedBg
-        }
+        fadeViews.toClear()
         
         let root = UIView().addTo(view).tuned {
             $0.top(view).left(view).width(Screen.width).height(Screen.height)
-        }
-        
-        bgImageView.addTo(root).tuned {
-            $0.fillParent().configureFill()
-        }
-        
-        coverView.addTo(root).tuned {
-            $0.fillParent()
-            $0.backgroundColor = Color.darkOverlay
+            bgImageView.addTo($0).fillParent().configureFill()
+            coverView.addTo($0).fillParent().backgroundColor = Color.Bg.fadeDark
         }
         
         titleLabel.addTo(root).tuned {
             titleCyPin = $0.cx(root).pinCy(root, GUI.initialTitleY)
             $0.update(Font.bigTitle, .white)
-            $0.text = Text.appTitle.lowercased()
+            $0.text = Text.Auth.appTitle.lowercased()
         }
         
         viewButton.addTo(root).tuned {
@@ -120,10 +109,10 @@ final class LandingViewController: ViewController {
     
     private enum GUI {
         static let initialDelay: TimeInterval = 0.3
-        static let darkDuration: TimeInterval = 0.55
+        static let inDuration: TimeInterval = 0.55
         static let titleDuration: TimeInterval = 0.5
         static let outDuration: TimeInterval = 0.45
-        static let navFadeDuration: TimeInterval = 0.35
+        static let transitionDuration: TimeInterval = 0.35
         
         static let initialTitleY: CGFloat = -60
         static let destinationTitleY = NumConst.attached

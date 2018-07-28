@@ -6,7 +6,7 @@ final class DetailsViewController: ViewController {
     
     // MARK: Properties
     
-    private let statsView = DetailsStatsView(viewModel: DetailsStatsView.defaultViewModel)
+    private let statsView = StatsView(viewModel: StatsView.defaultViewModel)
     
     // MARK: Lifecycle
     
@@ -19,7 +19,7 @@ final class DetailsViewController: ViewController {
     // MARK: Animation
     
     private func dispatchInAnimation() {
-        after(GUI.inDelay) { UIView.animate(withDuration: GUI.inDur, animations: self.statsView.toOpaque) }
+        after(GUI.inDelay) { UIView.animate(withDuration: GUI.inDuration, animations: self.statsView.toOpaque) }
     }
     
     // MARK: Configuration
@@ -27,7 +27,7 @@ final class DetailsViewController: ViewController {
     private func configure() {
         tuned {
             $0.title = Text.Details.title
-            $0.view.backgroundColor = Color.feedBg
+            $0.view.backgroundColor = Color.Bg.screen
             $0.configureDismissButton()
         }
         
@@ -41,6 +41,6 @@ final class DetailsViewController: ViewController {
     
     private enum GUI {
         static let inDelay: TimeInterval = 0.85
-        static let inDur: TimeInterval = 0.35
+        static let inDuration: TimeInterval = 0.35
     }
 }

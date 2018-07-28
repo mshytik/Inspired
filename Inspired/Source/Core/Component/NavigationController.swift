@@ -11,7 +11,7 @@ class NavigationController: UINavigationController {
             $0.tintColor = .white
             $0.barStyle = .black
             $0.isTranslucent = false
-            $0.barTintColor = Color.navBg
+            $0.barTintColor = Color.Bg.navBar
             $0.titleTextAttributes = [.foregroundColor: UIColor.white, .font: Font.navTitle]
         }
     }
@@ -24,7 +24,7 @@ class NavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Color.feedBg
+        view.backgroundColor = Color.Bg.screen
     }
 }
 

@@ -3,9 +3,6 @@ import WebKit
 
 // MARK: Data
 
-typealias Json = [String: Any]
-typealias Args = [UIApplicationLaunchOptionsKey: Any]
-
 enum Result<Value> {
     case success(value: Value)
     case failure(error: Error)
@@ -25,17 +22,21 @@ enum Result<Value> {
     }
 }
 
+typealias Json = [String: Any]
+typealias Args = [UIApplicationLaunchOptionsKey: Any]
+
 // MARK: Ui
 
 typealias LayoutPin = NSLayoutConstraint
+typealias CollectionSource = UICollectionViewDataSource & UICollectionViewDelegateFlowLayout
 
 // MARK: Closure
 
 typealias Execution = () -> ()
 typealias Animation = Execution
 typealias OnComplete = (Bool) -> Void
-typealias PolicyComplete = (WKNavigationActionPolicy) -> Void
-
-// MARK: Protocol
-
-typealias CollectionSource = UICollectionViewDataSource & UICollectionViewDelegateFlowLayout
+typealias UrlCompletion = (URL) -> Void
+typealias PhotoCompletion = (Photo) -> Void
+typealias PhotosCompletion = ([Photo]) -> Void
+typealias UrlPolicyHandler = (WKNavigationActionPolicy) -> Void
+typealias UrlChallengeHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void

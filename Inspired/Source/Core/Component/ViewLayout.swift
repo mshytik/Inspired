@@ -50,6 +50,7 @@ extension UIView {
     
     @discardableResult func fillParent() -> Self { superview.open { top($0).bottom($0).left($0).right($0) }; return self }
     @discardableResult func cxy(_ toView: UIView) -> Self { return cx(toView).cy(toView) }
+    @discardableResult func square(_ value: CGFloat) -> Self { return width(value).height(value) }
     
     // MARK: Core
     

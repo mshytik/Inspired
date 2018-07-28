@@ -10,7 +10,12 @@ class ViewController: UIViewController {
         return .lightContent
     }
     
-    // MARK: Navigation
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
+    }
+    
+    // MARK: Configuration
     
     func configureDismissButton() {
         UIButton(type: .custom).tuned {
@@ -21,8 +26,14 @@ class ViewController: UIViewController {
         }
     }
     
+    private func configure() {
+        view.backgroundColor = Color.Bg.screen
+    }
+    
+    // MARK: Navigation
+    
     @objc func cancel() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }
 

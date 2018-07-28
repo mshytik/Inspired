@@ -25,9 +25,9 @@ import UIKit
     }
     
     private func configureWindow() {
-        window = Window(frame: Screen.bounds).tuned {
+        window = UIWindow(frame: Screen.bounds).tuned {
             $0.width(Screen.width).height(Screen.height)
-            $0.backgroundColor = Color.feedBg
+            $0.backgroundColor = Color.Bg.screen
             $0.rootViewController = SplashViewController()
             $0.makeKeyAndVisible()
         }

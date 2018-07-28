@@ -15,10 +15,6 @@ final class Photo {
     let width: CGFloat
     let height: CGFloat
     
-    var heightForFullWidth: CGFloat {
-        return min(Screen.bounds.width * (height / width), 300)
-    }
-    
     // MARK: Init
     
     init(json: Json) {

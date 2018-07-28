@@ -27,46 +27,44 @@ final class FeedCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         
         let root = UIView().addTo(contentView).tuned {
-            $0.left(contentView).top(contentView).width(Screen.bounds.width)
+            $0.left(contentView).top(contentView).width(Screen.width)
             heightPin = $0.pinHeight(GUI.defaultRootHeight)
         }
         
-        photoImageView.addTo(root).tuned {
-            $0.fillParent().configureFill()
-        }
+        photoImageView.addTo(root).fillParent().configureFill()
         
         UIView().addTo(root).tuned {
-            $0.bottom(root).left(root).width(Screen.bounds.width).height(0.5)
-            $0.backgroundColor = .black
+            $0.bottom(root).left(root).width(Screen.width).height(Layout.separatorH)
+            $0.backgroundColor = Color.Bg.separator
         }
         
         let bottomRoot = UIView().addTo(contentView).tuned {
-            $0.under(root).left(root).right(root).height(52)
-            $0.backgroundColor = Color.navBg
+            $0.under(root).left(root).right(root).height(FeedCellViewModel.barHeight)
+            $0.backgroundColor = Color.Bg.navBar
         }
         
         titleLabel.addTo(bottomRoot).tuned {
-            $0.left(bottomRoot, 16).cy(bottomRoot).update(Font.photoAuthor, .white)
-            $0.numberOfLines = 0
-            $0.lineBreakMode = .byWordWrapping
+            $0.left(bottomRoot, Layout.margin).cy(bottomRoot)
+            $0.configureMultiline()
+            $0.update(Font.photoAuthor, .white)
         }
         
         let loadButton = UIButton(type: .custom).addTo(bottomRoot).tuned {
-            $0.cy(titleLabel).right(bottomRoot, -16).width(25).height(25)
-            $0.setImage(Image.downloadPhoto.withRenderingMode(.alwaysTemplate), for: .normal)
-            $0.tintColor = UIColor.white.withAlphaComponent(0.65)
+            $0.cy(titleLabel).right(bottomRoot, -Layout.margin).square(GUI.iconSide)
+            $0.setImage(Image.downloadPhoto.template, for: .normal)
+            $0.tintColor = GUI.iconColor
         }
         
         let chartImage = UIImageView().addTo(bottomRoot).tuned {
-            $0.cy(titleLabel, -1).before(loadButton, -24).width(25).height(25)
-            $0.image = Image.chart.withRenderingMode(.alwaysTemplate)
-            $0.tintColor = UIColor.white.withAlphaComponent(0.65)
+            $0.cy(titleLabel, GUI.chartDy).before(loadButton, GUI.iconDx).square(GUI.iconSide)
+            $0.image = Image.chart.template
+            $0.tintColor = GUI.iconColor
         }
         
         UIImageView().addTo(bottomRoot).tuned {
-            $0.cy(titleLabel, -2).before(chartImage, -24).width(25).height(25)
-            $0.image = Image.like.withRenderingMode(.alwaysTemplate)
-            $0.tintColor = UIColor.white.withAlphaComponent(0.65)
+            $0.cy(titleLabel, GUI.likeDy).before(chartImage, GUI.iconDx).square(GUI.iconSide)
+            $0.image = Image.like.template
+            $0.tintColor = GUI.iconColor
         }
     }
     
@@ -79,10 +77,10 @@ final class FeedCell: UICollectionViewCell {
     
     // MARK: Configuration
     
-    func configure(photo: Photo) {
-        titleLabel.text = "by " + photo.name + "\non " + Format.prettyPublishDate(photo.date)
-        heightPin?.constant = photo.heightForFullWidth
-        configure(imageUrlString: photo.smallUrl)
+    func configure(viewModel: FeedCellViewModel) {
+        titleLabel.text = viewModel.title
+        heightPin?.constant = viewModel.fullWidthPhotoHeight
+        configure(imageUrlString: viewModel.photoUrlString)
     }
     
     private func configure(imageUrlString: String) {
@@ -99,6 +97,11 @@ final class FeedCell: UICollectionViewCell {
     
     private enum GUI {
         static let defaultRootHeight: CGFloat = 300
+        static let iconSide: CGFloat = 25
+        static let iconDx: CGFloat = -24
+        static let chartDy: CGFloat = -1
+        static let likeDy: CGFloat = -2
+        static let iconColor = UIColor.white.withAlphaComponent(0.65)
         
         static var imageOptions: ImageLoadingOptions {
             return ImageLoadingOptions(transition: ImageLoadingOptions.Transition.fadeIn(duration: 0.3))
